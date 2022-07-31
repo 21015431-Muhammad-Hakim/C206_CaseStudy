@@ -1,11 +1,14 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class C206_CaseStudy {
 
 	private ArrayList<Parent> parentList = new ArrayList<Parent>();
 	private static ArrayList<Student> studentList = new ArrayList<Student>();
 	private ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
+	private static ArrayList<Cca> ccaList = new ArrayList<Cca>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -33,9 +36,36 @@ public class C206_CaseStudy {
 					String studentID = Helper.readString("Enter in studentID");
 					deleteStudent(studentID);
 				}
-			} else if (option == 2) {
-				int option2 = Helper.readInt("Enter choice > (1.Add Parent/2.View Parent/Delete Parent > ");
-			} else if (option == 3) {
+			} 
+			else if (option == 2) {
+				
+				int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
+				
+				if(option2 == 1) {
+					String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
+					String ccaDescription = Helper.readString("Enter CCA description > ");
+					int classSize = Helper.readInt("Enter class size > ");
+					String ccaDay = Helper.readString("Enter day of CCA > ");
+					
+					String ccaTime = Helper.readString("Enter time of CCA > ");
+					
+					
+					String ccaVenue = Helper.readString("Enter venue of CCA > ");
+					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
+					addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge);
+					
+				}
+				else if(option2 == 2) {
+					viewAllCca();
+				}
+				else if(option2 == 3) {
+					String ccaTitle = Helper.readString("Enter CCA title > ");
+					deleteCca(ccaTitle);
+				}
+				
+			} 
+			
+			else if (option == 3) {
 				int option3 = Helper.readInt("Enter choice > ");
 			} else if (option == 4) {
 				int option4 = Helper.readInt("Enter choice > ");
@@ -90,6 +120,44 @@ public class C206_CaseStudy {
 			System.out.println(output);
 		}
 
+	}
+	
+	//================================= CCA Part =================================\\
+	
+	public static void addCca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge) {
+		
+		String output = "";
+		if(ccaList.add(new Cca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
+			output = "CCA has been added!";
+		}
+		else {
+			output = "Failed to add CCA.";
+		}
+		System.out.println(output);
+	}
+	
+	public static void viewAllCca() {
+		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
+		for(Cca c : ccaList) {
+			output += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
+			
+		}
+		System.out.println(output);
+	}
+	
+	public static void deleteCca(String ccaTitle) {
+		
+		String output = "";
+		for (int i = 0; i < ccaList.size(); i++) {
+			if (ccaList.get(i).getCcaTitle().equalsIgnoreCase(ccaTitle)){
+				ccaList.remove(i);
+				output = "CCA has been removed!";
+			}
+			else {
+				output = "CCA remove failed.";
+			}
+			System.out.println(output);
+		}
 	}
 
 	//================================= Parent Part =================================\\
