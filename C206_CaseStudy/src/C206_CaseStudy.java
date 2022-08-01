@@ -183,23 +183,23 @@ public class C206_CaseStudy {
 			System.out.println("Failed to register!");
 		}
 	}
-	public String viewParent() {
+	public String viewParent(ArrayList<Parent> parentList) {
 		String output = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
 		for (Parent p: parentList) {
-			output += String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10d\n", p.getStudentID(), p.getStudentName(), p.getGrade(), p.getClassID(), p.getTeacherName(), p.getParentName(), p.getParentEmail(), p.getParentContact());
+			output += String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10d\n", p.getStudentObject().getStudentID(), p.getStudentObject().getStudentName(), p.getStudentObject().getGrade(), p.getStudentObject().getClassID(), p.getStudentObject().getTeacherName(), p.getParentName(), p.getParentEmail(), p.getParentContact());
 		}
 		return output;
 	}
 
-	public void deleteParent(int ccaID, String studentID) {
-		for (int i=0;i<updatedParentList.size();i++) {
-			if (updatedParentList.get(i).getStudentID().equals(studentID) && updatedParentList.get(i).getCCAID() == ccaID){
+	public void deleteParent(int ccaID, String studentID, ArrayList<Parent> updatedParentList, ArrayList<Parent> parentList) {
+		for (int i=0;i<updatedParentList.size();i++) {//updatedParentList has elements inside
+			if (updatedParentList.get(i).getParentObject().getStudentObject().getStudentID().equals(studentID) && updatedParentList.get(i).getParentObject().getCCAID() == ccaID){
 				updatedParentList.remove(i);
 			}
 		}
 
 		for (int i=0;i<parentList.size();i++) {
-			if (parentList.get(i).getStudentID().equals(studentID) && parentList.get(i).getCCAID() == ccaID){
+			if (parentList.get(i).getStudentObject().getStudentID().equals(studentID)){
 				parentList.remove(i);
 			}
 		}
