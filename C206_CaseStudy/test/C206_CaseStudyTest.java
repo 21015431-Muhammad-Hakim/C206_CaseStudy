@@ -50,7 +50,7 @@ public class C206_CaseStudyTest {
 		parentList.clear();
 		parentList.add(parent);//0
 		parentList.add(parent2);//1
-		object.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);//2
+		C206_CaseStudy.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);//2
 		assertEquals(parentList.get(0).getStudentID(), parentList.get(2).getStudentID());
 		assertEquals(parentList.get(0).getStudentName(), parentList.get(2).getStudentName());
 		assertEquals(parentList.get(0).getGrade(), parentList.get(2).getGrade());
@@ -65,7 +65,7 @@ public class C206_CaseStudyTest {
 	public void testViewParent() {
 		//test if the output is printed correctly
 		parentList.clear();
-		object.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);
+		C206_CaseStudy.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);
 		String output = object.viewParent(parentList);
 		String testOutput = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
 		testOutput += String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10d\n", parentList.get(0).getStudentObject().getStudentID(), parentList.get(0).getStudentObject().getStudentName(), parentList.get(0).getStudentObject().getGrade(), parentList.get(0).getStudentObject().getClassID(), parentList.get(0).getStudentObject().getTeacherName(), parentList.get(0).getParentName(), parentList.get(0).getParentEmail(), parentList.get(0).getParentContact());
@@ -77,7 +77,7 @@ public class C206_CaseStudyTest {
 	public void testDeleteParent() {
 		//test if the parent is deleted from arraylist
 		parentList.clear();//start the test without external factor
-		object.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);//add in parent
+		C206_CaseStudy.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);//add in parent
 		object.deleteParent(ccaID, student.getStudentID(), updatedParentList, parentList);
 		assertEquals(0, parentList.size());//there should have nothing inside
 	}
@@ -86,7 +86,7 @@ public class C206_CaseStudyTest {
 	public void testDeleteParentFail() {
 		//test if the parent is deleted from arraylist
 		parentList.clear();//start the test without external factor
-		object.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);//add in parent
+		C206_CaseStudy.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);//add in parent
 		object.deleteParent(ccaID, student2.getStudentID(), updatedParentList, parentList);
 		assertNotEquals(0, parentList.size());//there should have 1 elemnt inside
 	}

@@ -4,22 +4,22 @@ import java.util.Random;
 
 public class C206_CaseStudy {
 
-	private ArrayList<Parent> parentList = new ArrayList<Parent>();
+	private static ArrayList<Parent> parentList = new ArrayList<Parent>();
 	private static ArrayList<Student> studentList = new ArrayList<Student>();
-	private ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
+	private static ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
 	private static ArrayList<Cca> ccaList = new ArrayList<Cca>();
-	private int ccaID;
+	private static int ccaID;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		int option = 0;
 
-		while (option != 3) {
+		while (option != 6) {
 			menu();
 			option = Helper.readInt("Enter choice > ");
 
-			if (option == 1) {
+			if (option == 1) {//student
 				int option1 = Helper.readInt("Enter choice (1.Add Student/2.View Student/Delete Student > ");
 				if(option1 == 1) {
 					String studentID = Helper.readString("Enter in student ID");
@@ -37,7 +37,7 @@ public class C206_CaseStudy {
 					deleteStudent(studentID);
 				}
 			} 
-			else if (option == 2) {
+			else if (option == 2) {//cca
 				
 				int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
 				
@@ -65,13 +65,58 @@ public class C206_CaseStudy {
 				
 			} 
 			
-			else if (option == 3) {
-				int option3 = Helper.readInt("Enter choice > ");
-			} else if (option == 4) {
+			else if (option == 3) {//cca category
 				int option4 = Helper.readInt("Enter choice > ");
-			} else if (option == 5) {
+			} 
+			
+			else if (option == 4) {//parent(assume the student is registered first)
+				int option3 = 0;
+				while (option3 !=4) {
+					parentMenu();
+					option3 = Helper.readInt("Enter choice > ");
+					
+					if (option3 == 1) {
+						String studentID = Helper.readString("Enter in student ID");
+						String parentName = Helper.readString("Enter in parent's name");
+						String parentEmail = Helper.readString("Enter in parent's email");
+						int parentContact = Helper.readInt("Enter in parent's contact");
+						
+						Student studentObject = null;
+									
+						for (Student s: studentList) {
+							if (s.getStudentID().equals(studentID)) {
+								studentObject = s;
+							}
+						}
+						addParent(studentObject, parentName, parentEmail, parentContact, parentList, updatedParentList, ccaID);
+					}
+					
+					else if (option3 == 2) {
+						System.out.println(viewParent(parentList));//do not show cca ID
+					}
+					
+					else if (option3 == 3) {
+						String studentID = Helper.readString("Enter in student ID");
+						ccaID = Helper.readInt("Enter in CCA ID");
+						
+						deleteParent(ccaID, studentID, updatedParentList, parentList);
+					}
+					
+					else if (option3 == 4) {
+						
+					}
+					
+					else {
+						System.out.println("No such option");
+					}
+				}
+			} 
+			
+			else if (option == 5) {//registration system
 				int option5 = Helper.readInt("Enter choice > ");
-			} else if (option == 6) {
+			} 
+			
+			else if (option == 6) {//quit
 				System.out.println("Thank You for using the CCA Registration App");
 			}
 		}
@@ -86,6 +131,14 @@ public class C206_CaseStudy {
 		System.out.println("5. Registration System");
 		System.out.println("6. Quit");
 		Helper.line(80, "-");
+	}
+	
+	public static void parentMenu() {
+		C206_CaseStudy.setHeader("Parent");
+		System.out.println("1. Add parent");
+		System.out.println("2. View parent");
+		System.out.println("3. Delete parent");
+		System.out.println("4. Quit");
 	}
 
 	public static void setHeader(String header) {
@@ -162,7 +215,7 @@ public class C206_CaseStudy {
 
 	//================================= Parent Part =================================\\
 
-	public void addParent(Student studentObject, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList, int ccaID) {
+	public static void addParent(Student studentObject, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList, int ccaID) {
 		int size = parentList.size();
 		parentList.add(new Parent(studentObject, parentName, parentEmail, parentContact));
 		if (parentList.size() == size+1) {
@@ -183,7 +236,7 @@ public class C206_CaseStudy {
 			System.out.println("Failed to register!");
 		}
 	}
-	public String viewParent(ArrayList<Parent> parentList) {
+	public static String viewParent(ArrayList<Parent> parentList) {
 		String output = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
 		for (Parent p: parentList) {
 			output += String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10d\n", p.getStudentObject().getStudentID(), p.getStudentObject().getStudentName(), p.getStudentObject().getGrade(), p.getStudentObject().getClassID(), p.getStudentObject().getTeacherName(), p.getParentName(), p.getParentEmail(), p.getParentContact());
@@ -191,7 +244,7 @@ public class C206_CaseStudy {
 		return output;
 	}
 
-	public void deleteParent(int ccaID, String studentID, ArrayList<Parent> updatedParentList, ArrayList<Parent> parentList) {
+	public static void deleteParent(int ccaID, String studentID, ArrayList<Parent> updatedParentList, ArrayList<Parent> parentList) {
 		for (int i=0;i<updatedParentList.size();i++) {//updatedParentList has elements inside
 			if (updatedParentList.get(i).getParentObject().getStudentObject().getStudentID().equals(studentID) && updatedParentList.get(i).getParentObject().getCCAID() == ccaID){
 				updatedParentList.remove(i);
