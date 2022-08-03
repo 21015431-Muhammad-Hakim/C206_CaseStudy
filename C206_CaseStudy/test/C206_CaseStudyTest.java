@@ -10,29 +10,59 @@ public class C206_CaseStudyTest {
 
 	private Student student = new Student ("", "", "", "", "");
 	private Student student2  = new Student ("", "", "", "", "");
+	
+	private String studentID = "";
+	private String studentName = "";
+	private String studentGrade = "";
+	private String studentClass = "";
+	private String studentTeacher = "";
+	
+	private String studentID1 = "";
+	private String studentName1 = "";
+	private String studentGrade1 = "";
+	private String studentClass1 = "";
+	private String studentTeacher1 = "";
+	
 	private String parentName = "";
 	private String parentName2 = "";
 	private String parentEmail = "";
 	private String parentEmail2 = "";
+	
 	private int contact = 0;
 	private int contact2 = 0;
 	private Parent parent = new Parent(student, "", "", 0);
 	private Parent parent2 = new Parent(student, "", "", 0);
 	private int ccaID = 0;
 	private C206_CaseStudy object = new C206_CaseStudy();
+	private ArrayList<Student> studentList = new ArrayList<Student>();
 	private ArrayList<Parent> parentList = new ArrayList<Parent>();
 	private ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
 	
 	@Before
 	public void setUp() throws Exception {
-		student = new Student("S1", "John", "A1", "W2-E", "Mary");
-		student2 = new Student("S2", "Johns", "A2", "W2_A", "Marry");
+		studentID = "T0200537D";
+		studentName = "John";
+		studentGrade = "P6";
+		studentClass = "6A";
+		studentTeacher = "Mary";
+		
+		studentID1 = "T0200537F";
+		studentName1 = "Johns";
+		studentGrade1 = "P5";
+		studentClass1 = "5B";
+		studentTeacher1 = "Marry";
+		
+		student = new Student(studentID, studentName, studentGrade, studentClass, studentTeacher);
+		student2 = new Student(studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1);
+		
 		parentName = "Jackson";
 		parentName2 = "Jacksons";
 		parentEmail = "Jackson@gmail.com";
 		parentEmail2 = "Jacksons@gmail.com";
+		
 		contact = 12345678;
 		contact2 = 12345679;
+		
 		parent = new Parent(student, parentName, parentEmail, contact);
 		parent2 = new Parent(student2, parentName2, parentEmail2, contact2);
 		ccaID = 12345678;		
@@ -44,6 +74,24 @@ public class C206_CaseStudyTest {
 		assertTrue("C206_CaseStudy_SampleTest ",true);
 	}
 	
+	@Test
+	public void testAddStudent() {
+		//test if the student is added into arraylist
+		studentList.clear();
+		studentList.add(student);
+		studentList.add(student2);
+		//Check if new students can be detected
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher);
+		assertEquals("Check that student arraylist size is 2", 2, studentList.size());
+	}
+	@Test
+	public void testViewStudent() {
+		
+	}
+	@Test
+	public void testDeleteStudent() {
+		
+	}
 	@Test
 	public void testAddParent() {
 		//test if the parent is added into arraylist
