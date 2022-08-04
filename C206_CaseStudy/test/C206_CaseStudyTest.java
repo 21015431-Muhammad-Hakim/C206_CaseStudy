@@ -137,9 +137,7 @@ public class C206_CaseStudyTest {
 		
 		//Check if new cca can be detected
 
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
-
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 
 		assertEquals("Check that student arraylist size is 2", 2, ccaList.size()); //Check the size of the arrayList
 	
@@ -149,10 +147,7 @@ public class C206_CaseStudyTest {
 	public void testViewAllCca() {
 		ccaList.clear(); //start the test without external factor
 		
-
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList); //Add object into arrayList
-
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList); //Add object into arrayList
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);//Add object into arrayList
 
 		String output = C206_CaseStudy.viewAllCca(ccaList);
 		String testOutput = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
@@ -167,9 +162,7 @@ public class C206_CaseStudyTest {
 		
 		ccaList.clear();
 
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
-
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 
 		C206_CaseStudy.deleteCca(ccaTitle, ccaList);
 		assertEquals(ccaList.size(), 0); //Check the size of the arrayList
