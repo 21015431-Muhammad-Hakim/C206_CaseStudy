@@ -139,8 +139,8 @@ public class C206_CaseStudy {
 			} 
 
 			else if (option == 5) {//registration system
-				int option5 = Helper.readInt("Enter choice > ");
 				loginsystem();
+				int option5 = Helper.readInt("Enter choice > ");
 				loginMenu();
 				int choice = Helper.readInt("Enter the choice >");
 				while (choice != 3) {
