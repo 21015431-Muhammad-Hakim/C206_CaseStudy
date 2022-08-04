@@ -140,15 +140,14 @@ public class C206_CaseStudy {
 
 			else if (option == 5) {//registration system
 				loginsystem();
-				int option5 = Helper.readInt("Enter choice > ");
 				loginMenu();
-				int choice = Helper.readInt("Enter the choice >");
-				while (choice != 3) {
-					if (choice == 1) {
+				int option5 = Helper.readInt("Enter the choice >");
+				while (option5 != 3) {
+					if (option5 == 1) {
 						addStudentforCCA();
-					} else if (choice == 2) {
+					} else if (option5 == 2) {
 						viewStudentRegCCA();
-					} else if (choice == 3) {
+					} else if (option5 == 3) {
 						System.out.println("You will be log out of the system.");
 					}
 				}
