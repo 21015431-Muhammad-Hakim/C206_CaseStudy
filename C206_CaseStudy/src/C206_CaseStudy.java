@@ -39,7 +39,7 @@ public class C206_CaseStudy {
 							if(result1[1].contains(result2[0])) {
 								String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
 								String studentCCA = Helper.readString("Enter in student's CCA(If no CCA enter N/A)> ");
-								addStudent(studentID, studentName, grade, classID, teacherName, studentCCA, studentList);
+								addStudent(studentID, studentName, grade, classID, teacherName, studentCCA);
 								break;
 							}else {
 								System.out.println("Grade year and Class year do not match!");
@@ -50,11 +50,11 @@ public class C206_CaseStudy {
 					}
 				}
 				else if(option1 == 2) {
-					viewStudent(studentList);
+					viewStudent();
 				}
 				else if(option1 == 3) {
 					String studentID = Helper.readString("Enter in studentID > ");
-					deleteStudent(studentID, studentList);
+					deleteStudent(studentID);
 				}
 				else if(option1 == 4) {
 					String studentID = Helper.readString("Enter in studentID > ");
@@ -73,24 +73,20 @@ public class C206_CaseStudy {
 						String ccaTime = Helper.readString("Enter time of CCA > ");
 
 
+						String ccaVenue = Helper.readString("Enter venue of CCA > ");
+						String instructorInCharge = Helper.readString("Enter instructor in charge > ");
+						addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge);
 
-					String ccaVenue = Helper.readString("Enter venue of CCA > ");
-					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
-					addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
-
-				}
+					}
 					else if(option2 == 2) {
-						viewAllCca(ccaList);
+						viewAllCca();
 					}
 					else if(option2 == 3) {
 						String ccaTitle = Helper.readString("Enter CCA title > ");
-						deleteCca(ccaTitle, ccaList);
+						deleteCca(ccaTitle);
 					}
 
-				}
-
-
-			} 
+				} 
 
 				else if (option == 3) {//cca category
 					int option4 = Helper.readInt("Enter choice > ");
@@ -160,7 +156,10 @@ public class C206_CaseStudy {
 				}
 			}
 		}
+	}
 	
+	//================================= Menu Codes =================================\\
+
 	public static void menu() {
 		C206_CaseStudy.setHeader("CCA Registration App");
 		System.out.println("1. Student");
@@ -170,6 +169,15 @@ public class C206_CaseStudy {
 		System.out.println("5. Registration System");
 		System.out.println("6. Quit");
 		Helper.line(80, "-");
+	}
+	
+	public static void categoryMenu() {
+		C206_CaseStudy.setHeader("CCA Category");
+		System.out.println("1. View Category");
+		System.out.println("2. Add Category");
+		System.out.println("3. Delete Category");
+		System.out.println("4. Quit");
+		
 	}
 
 	public static void parentMenu() {
@@ -195,7 +203,7 @@ public class C206_CaseStudy {
 
 	//================================= Student Part =================================\\
 
-	public static void addStudent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, ArrayList<Student> studentList) {
+	public static void addStudent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA) {
 		String output = "";
 		if(studentList.add(new Student(studentID, studentName, grade, classID, teacherName, studentCCA))) {
 			output = "Student has been added!";
@@ -204,7 +212,7 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
-	public static String viewStudent(ArrayList<Student> studentList) {
+	public static void viewStudent() {
 		String output = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", 
 				"Class ID", "Teacher name", "Student CCA");
 		for (Student s: studentList) {
@@ -212,9 +220,8 @@ public class C206_CaseStudy {
 					s.getGrade(), s.getClassID(), s.getTeacherName(), s.getStudentCCA());
 		}
 		System.out.println(output);
-		return output;
 	}
-	public static void deleteStudent(String studentID, ArrayList<Student> studentList) {
+	public static void deleteStudent(String studentID) {
 		String output = "";
 		for (int i=0;i<studentList.size();i++) {
 			if (studentList.get(i).getStudentID().equals(studentID)){
@@ -223,9 +230,8 @@ public class C206_CaseStudy {
 			}else {
 				output = "Student not found!";
 			}
-			
+			System.out.println(output);
 		}
-		System.out.println(output);
 	}
 	public static void updateStudent(String studentID) {
 		for (int i=0;i<studentList.size();i++) {
@@ -253,7 +259,7 @@ public class C206_CaseStudy {
 
 	//================================= CCA Part =================================\\
 
-	public static void addCca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
+	public static void addCca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge) {
 
 		String output = "";
 		if(ccaList.add(new Cca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
@@ -265,17 +271,16 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static String viewAllCca(ArrayList<Cca> ccaList) {
+	public static void viewAllCca() {
 		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
 		for(Cca c : ccaList) {
 			output += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
 
 		}
 		System.out.println(output);
-		return output;
 	}
 
-	public static void deleteCca(String ccaTitle, ArrayList<Cca> ccaList) {
+	public static void deleteCca(String ccaTitle) {
 
 		String output = "";
 		for (int i = 0; i < ccaList.size(); i++) {
@@ -289,7 +294,21 @@ public class C206_CaseStudy {
 			System.out.println(output);
 		}
 	}
-
+	
+	//================================= Category Part ====================================\\
+	
+	public static void addCategory() {
+		
+	}
+	
+	public static void viewCategory() {
+		
+	}
+	
+	public static void deleteCategory() {
+		
+	}
+	
 	//================================= Parent Part =================================\\
 
 	public static void addParent(Student studentObject, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList, int ccaID) {
