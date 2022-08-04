@@ -29,7 +29,7 @@ public class Parent {
 		this.parentContact = parentContact;
 	}
 	
-	public Parent(Parent parentObject, int ccaID) {
+	public Parent(Parent parentObject, int ccaID) {//do not use the parent object created in the constructor below
 		this.parentObject = parentObject;
 		this.ccaID = ccaID;
 	}
