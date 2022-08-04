@@ -75,15 +75,15 @@ public class C206_CaseStudy {
 
 					String ccaVenue = Helper.readString("Enter venue of CCA > ");
 					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
-					addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge);
+					addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 
 				}
 				else if(option2 == 2) {
-					viewAllCca();
+					viewAllCca(ccaList);
 				}
 				else if(option2 == 3) {
 					String ccaTitle = Helper.readString("Enter CCA title > ");
-					deleteCca(ccaTitle);
+					deleteCca(ccaTitle, ccaList);
 				}
 
 			} 
@@ -226,7 +226,7 @@ public class C206_CaseStudy {
 
 	//================================= CCA Part =================================\\
 
-	public static void addCca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge) {
+	public static void addCca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
 
 		String output = "";
 		if(ccaList.add(new Cca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
@@ -238,16 +238,17 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void viewAllCca() {
+	public static String viewAllCca(ArrayList<Cca> ccaList) {
 		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
 		for(Cca c : ccaList) {
 			output += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
 
 		}
 		System.out.println(output);
+		return output;
 	}
 
-	public static void deleteCca(String ccaTitle) {
+	public static void deleteCca(String ccaTitle, ArrayList<Cca> ccaList) {
 
 		String output = "";
 		for (int i = 0; i < ccaList.size(); i++) {
