@@ -11,11 +11,17 @@ public class C206_CaseStudyTest {
 	private Student student = new Student ("", "", "", "", "", "");
 	private Student student2  = new Student ("", "", "", "", "", "");
 	
+<<<<<<< HEAD
 	private Cca cca1 = new Cca("", "", 0, "", "", "", "", "");
 	private Cca cca2 = new Cca("", "", 0, "", "", "", "", "");
+=======
+	private Cca cca1 = new Cca("", "", "", 0, "", "", "", "");
+	private Cca cca2 = new Cca("", "", "", 0, "", "", "", "");
+>>>>>>> branch 'master' of https://github.com/21015431-Muhammad-Hakim/C206_CaseStudy.git
 	
 	private String ccaTitle = "";
 	private String ccaDescription = "";
+	private String ccaCategory = "";
 	private int classSize = 0;
 	private String ccaDay = "";
 	private String ccaTime = "";
@@ -135,7 +141,11 @@ public class C206_CaseStudyTest {
 		ccaList.add(cca1);
 		
 		//Check if new cca can be detected
+<<<<<<< HEAD
 		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
+=======
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, ccaCategory, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+>>>>>>> branch 'master' of https://github.com/21015431-Muhammad-Hakim/C206_CaseStudy.git
 		assertEquals("Check that student arraylist size is 2", 2, ccaList.size()); //Check the size of the arrayList
 	
 	}
@@ -144,10 +154,14 @@ public class C206_CaseStudyTest {
 	public void testViewAllCca() {
 		ccaList.clear(); //start the test without external factor
 		
+<<<<<<< HEAD
 		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList); //Add object into arrayList
+=======
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, ccaCategory, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList); //Add object into arrayList
+>>>>>>> branch 'master' of https://github.com/21015431-Muhammad-Hakim/C206_CaseStudy.git
 		String output = C206_CaseStudy.viewAllCca(ccaList);
-		String testOutput = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
-		testOutput += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s", ccaList.get(0).getCcaTitle(), ccaList.get(0).getCcaDescription(), ccaList.get(0).getClassSize(), ccaList.get(0).getCcaDay(), ccaList.get(0).getCcaTime(), ccaList.get(0).getCcaVenue(), ccaList.get(0).getInstructorInCharge());
+		String testOutput = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
+		testOutput += String.format("\n%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", ccaList.get(0).getCcaTitle(), ccaList.get(0).getCcaDescription(), ccaList.get(0).getCategory(), ccaList.get(0).getClassSize(), ccaList.get(0).getCcaDay(), ccaList.get(0).getCcaTime(), ccaList.get(0).getCcaVenue(), ccaList.get(0).getInstructorInCharge());
 
 		assertEquals("Check that ViewAllCcaList", testOutput, output); //Check if the output is the same as testOutput
 		 
@@ -157,7 +171,11 @@ public class C206_CaseStudyTest {
 	public void testDeleteCca() {
 		
 		ccaList.clear();
+<<<<<<< HEAD
 		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
+=======
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, ccaCategory, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+>>>>>>> branch 'master' of https://github.com/21015431-Muhammad-Hakim/C206_CaseStudy.git
 		C206_CaseStudy.deleteCca(ccaTitle, ccaList);
 		assertEquals(ccaList.size(), 0); //Check the size of the arrayList
 	}
