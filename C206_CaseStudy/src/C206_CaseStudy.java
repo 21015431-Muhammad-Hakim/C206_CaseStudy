@@ -43,7 +43,7 @@ public class C206_CaseStudy {
 							if(result1[1].contains(result2[0])) {
 								String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
 								String studentCCA = Helper.readString("Enter in student's CCA(If no CCA enter N/A)> ");
-								addStudent(studentID, studentName, grade, classID, teacherName, studentCCA);
+								addStudent(studentID, studentName, grade, classID, teacherName, studentCCA, studentList);
 								break;
 							}
 							else {
@@ -57,11 +57,11 @@ public class C206_CaseStudy {
 					}
 				}
 				else if(option1 == 2) {
-					viewStudent();
+					viewStudent(studentList);
 				}
 				else if(option1 == 3) {
 					String studentID = Helper.readString("Enter in studentID > ");
-					deleteStudent(studentID);
+					deleteStudent(studentID, studentList);
 				}
 				else if(option1 == 4) {
 					String studentID = Helper.readString("Enter in studentID > ");
@@ -264,7 +264,7 @@ public class C206_CaseStudy {
 
 	//================================= Student Part =================================\\
 
-	public static void addStudent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA) {
+	public static void addStudent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, ArrayList<Student> studentList) {
 		String output = "";
 		if(studentList.add(new Student(studentID, studentName, grade, classID, teacherName, studentCCA))) {
 			output = "Student has been added!";
@@ -273,7 +273,7 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
-	public static void viewStudent() {
+	public static String viewStudent(ArrayList<Student> studentList) {
 		String output = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", 
 				"Class ID", "Teacher name", "Student CCA");
 		for (Student s: studentList) {
@@ -281,8 +281,9 @@ public class C206_CaseStudy {
 					s.getGrade(), s.getClassID(), s.getTeacherName(), s.getStudentCCA());
 		}
 		System.out.println(output);
+		return output;
 	}
-	public static void deleteStudent(String studentID) {
+	public static void deleteStudent(String studentID, ArrayList<Student> studentList) {
 		String output = "";
 		for (int i=0;i<studentList.size();i++) {
 			if (studentList.get(i).getStudentID().equals(studentID)){
@@ -333,13 +334,14 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void viewAllCca(ArrayList<Cca> ccaList) {
+	public static String viewAllCca(ArrayList<Cca> ccaList) {
 		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
 		for(Cca c : ccaList) {
 			output += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
 
 		}
 		System.out.println(output);
+		return output;
 	}
 
 	public static void deleteCca(String ccaTitle, ArrayList<Cca> ccaList) {

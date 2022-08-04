@@ -11,8 +11,8 @@ public class C206_CaseStudyTest {
 	private Student student = new Student ("", "", "", "", "", "");
 	private Student student2  = new Student ("", "", "", "", "", "");
 	
-	private Cca cca1 = new Cca("", "", 0, "", "", "", "");
-	private Cca cca2 = new Cca("", "", 0, "", "", "", "");
+	private Cca cca1 = new Cca("", "", 0, "", "", "", "", "");
+	private Cca cca2 = new Cca("", "", 0, "", "", "", "", "");
 	
 	private String ccaTitle = "";
 	private String ccaDescription = "";
@@ -40,6 +40,9 @@ public class C206_CaseStudyTest {
 	private String parentName2 = "";
 	private String parentEmail = "";
 	private String parentEmail2 = "";
+	
+	private String category = "";
+	private String category2 = "";
 	
 	private int contact = 0;
 	private int contact2 = 0;
@@ -81,6 +84,9 @@ public class C206_CaseStudyTest {
 		parent = new Parent(student, parentName, parentEmail, contact);
 		parent2 = new Parent(student2, parentName2, parentEmail2, contact2);
 		ccaID = 12345678;		
+		
+		category = "Basketball";
+		category2 = "Badminton";
 	}
 
 	@Test
@@ -129,7 +135,7 @@ public class C206_CaseStudyTest {
 		ccaList.add(cca1);
 		
 		//Check if new cca can be detected
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
 		assertEquals("Check that student arraylist size is 2", 2, ccaList.size()); //Check the size of the arrayList
 	
 	}
@@ -138,7 +144,7 @@ public class C206_CaseStudyTest {
 	public void testViewAllCca() {
 		ccaList.clear(); //start the test without external factor
 		
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList); //Add object into arrayList
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList); //Add object into arrayList
 		String output = C206_CaseStudy.viewAllCca(ccaList);
 		String testOutput = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
 		testOutput += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s", ccaList.get(0).getCcaTitle(), ccaList.get(0).getCcaDescription(), ccaList.get(0).getClassSize(), ccaList.get(0).getCcaDay(), ccaList.get(0).getCcaTime(), ccaList.get(0).getCcaVenue(), ccaList.get(0).getInstructorInCharge());
@@ -151,7 +157,7 @@ public class C206_CaseStudyTest {
 	public void testDeleteCca() {
 		
 		ccaList.clear();
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
 		C206_CaseStudy.deleteCca(ccaTitle, ccaList);
 		assertEquals(ccaList.size(), 0); //Check the size of the arrayList
 	}
