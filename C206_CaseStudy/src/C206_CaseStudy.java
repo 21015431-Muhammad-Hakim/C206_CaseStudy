@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-
+	
 public class C206_CaseStudy {
 
 	private static ArrayList<Parent> parentList = new ArrayList<Parent>();
@@ -60,40 +60,40 @@ public class C206_CaseStudy {
 					String studentID = Helper.readString("Enter in studentID > ");
 					updateStudent(studentID);
 				} 
+			}
+				else if (option == 2) {//cca
 
-			} 
-			
-			else if (option == 2) {//cca
+					int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
 
-				int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
+					if(option2 == 1) {
+						String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
+						String ccaDescription = Helper.readString("Enter CCA description > ");
+						String category = Helper.readString("Enter category > ");
+						int classSize = Helper.readInt("Enter class size > ");
+						String ccaDay = Helper.readString("Enter day of CCA > ");
 
-				if(option2 == 1) {
-					String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
-					String ccaDescription = Helper.readString("Enter CCA description > ");
-					String category = Helper.readString("Enter category > ");
-					int classSize = Helper.readInt("Enter class size > ");
-					String ccaDay = Helper.readString("Enter day of CCA > ");
+						String ccaTime = Helper.readString("Enter time of CCA > ");
 
-					String ccaTime = Helper.readString("Enter time of CCA > ");
 
-					String ccaVenue = Helper.readString("Enter venue of CCA > ");
-					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
-					addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+						String ccaVenue = Helper.readString("Enter venue of CCA > ");
+						String instructorInCharge = Helper.readString("Enter instructor in charge > ");
+						addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 
-				}
-				else if(option2 == 2) {
-					viewAllCca(ccaList);
-				}
-				else if(option2 == 3) {
-					String ccaTitle = Helper.readString("Enter CCA title > ");
-					deleteCca(ccaTitle, ccaList);
-				}
+					}
+					else if(option2 == 2) {
+						viewAllCca(ccaList);
+					}
+					else if(option2 == 3) {
+						String ccaTitle = Helper.readString("Enter CCA title > ");
+						deleteCca(ccaTitle, ccaList);
+					}
+
 
 			}
-
 			else if (option == 3) {//cca category
 				int option4 = Helper.readInt("Enter choice > ");
 			} 
+
 
 			else if (option == 4) {//parent(assume the student is registered first)
 				int option3 = 0;
@@ -139,16 +139,15 @@ public class C206_CaseStudy {
 			} 
 
 			else if (option == 5) {//registration system
-				int option5 = Helper.readInt("Enter choice > ");
 				loginsystem();
 				loginMenu();
-				int choice = Helper.readInt("Enter the choice >");
-				while (choice != 3) {
-					if (choice == 1) {
+				int option5 = Helper.readInt("Enter the choice >");
+				while (option5 != 3) {
+					if (option5 == 1) {
 						addStudentforCCA();
-					} else if (choice == 2) {
+					} else if (option5 == 2) {
 						viewStudentRegCCA();
-					} else if (choice == 3) {
+					} else if (option5 == 3) {
 						System.out.println("You will be log out of the system.");
 					}
 				}
@@ -160,6 +159,10 @@ public class C206_CaseStudy {
 		}
 	}
 
+	
+	//================================= Menu Codes =================================\\
+
+
 	public static void menu() {
 		C206_CaseStudy.setHeader("CCA Registration App");
 		System.out.println("1. Student");
@@ -169,6 +172,15 @@ public class C206_CaseStudy {
 		System.out.println("5. Registration System");
 		System.out.println("6. Quit");
 		Helper.line(80, "-");
+	}
+	
+	public static void categoryMenu() {
+		C206_CaseStudy.setHeader("CCA Category");
+		System.out.println("1. View Category");
+		System.out.println("2. Add Category");
+		System.out.println("3. Delete Category");
+		System.out.println("4. Quit");
+		
 	}
 
 	public static void parentMenu() {
@@ -223,8 +235,9 @@ public class C206_CaseStudy {
 				output = "Student not found!";
 			}
 
+			System.out.println(output);
+
 		}
-		System.out.println(output);
 	}
 	public static void updateStudent(String studentID) {
 		for (int i=0;i<studentList.size();i++) {
@@ -252,7 +265,9 @@ public class C206_CaseStudy {
 
 	//================================= CCA Part =================================\\
 
+
 	public static void addCca(String ccaTitle, String ccaDescription, String category, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
+
 
 		String output = "";
 		if(ccaList.add(new Cca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
@@ -264,8 +279,10 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
+
 	public static String viewAllCca(ArrayList<Cca> ccaList) {
 		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
+		
 		for(Cca c : ccaList) {
 			output += String.format("\n%-10s %-15s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getCategory(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
 
@@ -288,7 +305,21 @@ public class C206_CaseStudy {
 			System.out.println(output);
 		}
 	}
-
+	
+	//================================= Category Part ====================================\\
+	
+	public static void addCategory() {
+		
+	}
+	
+	public static void viewCategory() {
+		
+	}
+	
+	public static void deleteCategory() {
+		
+	}
+	
 	//================================= Parent Part =================================\\
 
 	public static void addParent(Student studentObject, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList, int ccaID) {
