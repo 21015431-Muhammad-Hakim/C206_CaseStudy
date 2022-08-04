@@ -174,7 +174,7 @@ public class C206_CaseStudyTest {
 		ccaList.clear();
 		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 		categoryList.add(category);
-		assertEquals("Check that category arraylist size is 2", 2, categoryList.size());
+		assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
 	}
 	
 	@Test
