@@ -60,107 +60,105 @@ public class C206_CaseStudy {
 					String studentID = Helper.readString("Enter in studentID > ");
 					updateStudent(studentID);
 				} 
-				else if (option == 2) {//cca
 
-					int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
+			} 
+			
+			else if (option == 2) {//cca
 
-					if(option2 == 1) {
-						String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
-						String ccaDescription = Helper.readString("Enter CCA description > ");
-						int classSize = Helper.readInt("Enter class size > ");
-						String ccaDay = Helper.readString("Enter day of CCA > ");
+				int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
 
-						String ccaTime = Helper.readString("Enter time of CCA > ");
+				if(option2 == 1) {
+					String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
+					String ccaDescription = Helper.readString("Enter CCA description > ");
+					int classSize = Helper.readInt("Enter class size > ");
+					String ccaDay = Helper.readString("Enter day of CCA > ");
 
-
+					String ccaTime = Helper.readString("Enter time of CCA > ");
 
 					String ccaVenue = Helper.readString("Enter venue of CCA > ");
 					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
 					addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 
 				}
-					else if(option2 == 2) {
-						viewAllCca(ccaList);
-					}
-					else if(option2 == 3) {
-						String ccaTitle = Helper.readString("Enter CCA title > ");
-						deleteCca(ccaTitle, ccaList);
-					}
-
+				else if(option2 == 2) {
+					viewAllCca(ccaList);
+				}
+				else if(option2 == 3) {
+					String ccaTitle = Helper.readString("Enter CCA title > ");
+					deleteCca(ccaTitle, ccaList);
 				}
 
+			}
 
+			else if (option == 3) {//cca category
+				int option4 = Helper.readInt("Enter choice > ");
 			} 
 
-				else if (option == 3) {//cca category
-					int option4 = Helper.readInt("Enter choice > ");
-				} 
+			else if (option == 4) {//parent(assume the student is registered first)
+				int option3 = 0;
+				while (option3 !=4) {
+					parentMenu();
+					option3 = Helper.readInt("Enter choice > ");
 
-				else if (option == 4) {//parent(assume the student is registered first)
-					int option3 = 0;
-					while (option3 !=4) {
-						parentMenu();
-						option3 = Helper.readInt("Enter choice > ");
+					if (option3 == 1) {
+						String studentID = Helper.readString("Enter in student ID");
+						String parentName = Helper.readString("Enter in parent's name");
+						String parentEmail = Helper.readString("Enter in parent's email");
+						int parentContact = Helper.readInt("Enter in parent's contact");
 
-						if (option3 == 1) {
-							String studentID = Helper.readString("Enter in student ID");
-							String parentName = Helper.readString("Enter in parent's name");
-							String parentEmail = Helper.readString("Enter in parent's email");
-							int parentContact = Helper.readInt("Enter in parent's contact");
+						Student studentObject = null;
 
-							Student studentObject = null;
-
-							for (Student s: studentList) {
-								if (s.getStudentID().equals(studentID)) {
-									studentObject = s;
-								}
+						for (Student s: studentList) {
+							if (s.getStudentID().equals(studentID)) {
+								studentObject = s;
 							}
-							addParent(studentObject, parentName, parentEmail, parentContact, parentList, updatedParentList, ccaID);
 						}
-
-						else if (option3 == 2) {
-							System.out.println(viewParent(parentList));//do not show cca ID
-						}
-
-						else if (option3 == 3) {
-							String studentID = Helper.readString("Enter in student ID");
-							ccaID = Helper.readInt("Enter in CCA ID");
-
-							deleteParent(ccaID, studentID, updatedParentList, parentList);
-						}
-
-						else if (option3 == 4) {
-
-						}
-
-						else {
-							System.out.println("No such option");
-						}
+						addParent(studentObject, parentName, parentEmail, parentContact, parentList, updatedParentList, ccaID);
 					}
-				} 
 
-				else if (option == 5) {//registration system
-					int option5 = Helper.readInt("Enter choice > ");
-					loginsystem();
-					loginMenu();
-					int choice = Helper.readInt("Enter the choice >");
-					while (choice != 3) {
-						if (choice == 1) {
-							addStudentforCCA();
-						} else if (choice == 2) {
-							viewStudentRegCCA();
-						} else if (choice == 3) {
-							System.out.println("You will be log out of the system.");
-						}
+					else if (option3 == 2) {
+						System.out.println(viewParent(parentList));//do not show cca ID
 					}
-				} 
 
-				else if (option == 6) {//quit
-					System.out.println("Thank You for using the CCA Registration App");
+					else if (option3 == 3) {
+						String studentID = Helper.readString("Enter in student ID");
+						ccaID = Helper.readInt("Enter in CCA ID");
+
+						deleteParent(ccaID, studentID, updatedParentList, parentList);
+					}
+
+					else if (option3 == 4) {
+
+					}
+
+					else {
+						System.out.println("No such option");
+					}
 				}
+			} 
+
+			else if (option == 5) {//registration system
+				int option5 = Helper.readInt("Enter choice > ");
+				loginsystem();
+				loginMenu();
+				int choice = Helper.readInt("Enter the choice >");
+				while (choice != 3) {
+					if (choice == 1) {
+						addStudentforCCA();
+					} else if (choice == 2) {
+						viewStudentRegCCA();
+					} else if (choice == 3) {
+						System.out.println("You will be log out of the system.");
+					}
+				}
+			} 
+
+			else if (option == 6) {//quit
+				System.out.println("Thank You for using the CCA Registration App");
 			}
 		}
-	
+	}
+
 	public static void menu() {
 		C206_CaseStudy.setHeader("CCA Registration App");
 		System.out.println("1. Student");
@@ -223,7 +221,7 @@ public class C206_CaseStudy {
 			}else {
 				output = "Student not found!";
 			}
-			
+
 		}
 		System.out.println(output);
 	}
@@ -381,11 +379,11 @@ public class C206_CaseStudy {
 		String output = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA");
 		for (int i=0; i<studentList.size(); i++) {
 			if(!studentList.get(i).getStudentCCA().equalsIgnoreCase("N/A")) {
-					output += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", studentList.get(i).getStudentID(), studentList.get(i).getStudentName(), studentList.get(i).getGrade(), studentList.get(i).getClassID(), 
-							studentList.get(i).getTeacherName(), studentList.get(i).getStudentCCA());
-				}
-			System.out.println(output);
+				output += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", studentList.get(i).getStudentID(), studentList.get(i).getStudentName(), studentList.get(i).getGrade(), studentList.get(i).getClassID(), 
+						studentList.get(i).getTeacherName(), studentList.get(i).getStudentCCA());
 			}
+			System.out.println(output);
 		}
-
 	}
+
+}
