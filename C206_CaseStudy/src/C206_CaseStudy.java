@@ -59,38 +59,39 @@ public class C206_CaseStudy {
 				else if(option1 == 4) {
 					String studentID = Helper.readString("Enter in studentID > ");
 					updateStudent(studentID);
+					
 				} 
-				else if (option == 2) {//cca
-
-					int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
-
-					if(option2 == 1) {
-						String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
-						String ccaDescription = Helper.readString("Enter CCA description > ");
-						int classSize = Helper.readInt("Enter class size > ");
-						String ccaDay = Helper.readString("Enter day of CCA > ");
-
-						String ccaTime = Helper.readString("Enter time of CCA > ");
-
-
-
-					String ccaVenue = Helper.readString("Enter venue of CCA > ");
-					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
-					addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
-
-				}
-					else if(option2 == 2) {
-						viewAllCca(ccaList);
-					}
-					else if(option2 == 3) {
-						String ccaTitle = Helper.readString("Enter CCA title > ");
-						deleteCca(ccaTitle, ccaList);
-					}
-
-				}
-
-
+				
 			} 
+			else if (option == 2) {//cca
+
+				int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
+
+				if(option2 == 1) {
+					String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
+					String ccaDescription = Helper.readString("Enter CCA description > ");
+					int classSize = Helper.readInt("Enter class size > ");
+					String ccaDay = Helper.readString("Enter day of CCA > ");
+
+					String ccaTime = Helper.readString("Enter time of CCA > ");
+
+
+
+				String ccaVenue = Helper.readString("Enter venue of CCA > ");
+				String instructorInCharge = Helper.readString("Enter instructor in charge > ");
+				addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+
+			}
+				else if(option2 == 2) {
+					viewAllCca(ccaList);
+				}
+				else if(option2 == 3) {
+					String ccaTitle = Helper.readString("Enter CCA title > ");
+					deleteCca(ccaTitle, ccaList);
+				}
+
+			}
+
 
 				else if (option == 3) {//cca category
 					int option4 = Helper.readInt("Enter choice > ");
