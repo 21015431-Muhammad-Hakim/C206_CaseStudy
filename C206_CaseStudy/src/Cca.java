@@ -21,8 +21,9 @@ public class Cca {
 	private String ccaTime;
 	private String ccaVenue;
 	private String instructorInCharge;
+	private String category;
 	
-	public Cca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge) {
+	public Cca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, String category) {
 		
 		this.ccaTitle = ccaTitle;
 		this.ccaDescription = ccaDescription;
@@ -31,6 +32,7 @@ public class Cca {
 		this.ccaTime = ccaTime;
 		this.ccaVenue = ccaVenue;
 		this.instructorInCharge = instructorInCharge;
+		this.category = category;
 	}
 
 	public String getCcaTitle() {
@@ -61,7 +63,9 @@ public class Cca {
 		return instructorInCharge;
 	}
 	
-	
+	public String getCategory() {
+		return category;
+	}
 	
 	
  
