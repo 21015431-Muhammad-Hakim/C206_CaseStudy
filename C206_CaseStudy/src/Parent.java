@@ -6,6 +6,7 @@ public class Parent {
 	private String grade;
 	private String classID;
 	private String teacherName;
+	private String studentCCA;
 	private String parentName;
 	private String parentEmail;
 	
@@ -22,8 +23,8 @@ public class Parent {
 		this.parentContact = parentContact;
 	}
 	
-	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String parentName, String parentEmail, int parentContact) {
-		this.studentObject = new Student(studentID, studentName, grade, classID, teacherName);
+	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, String parentName, String parentEmail, int parentContact) {
+		this.studentObject = new Student(studentID, studentName, grade, classID, teacherName, studentCCA);
 		this.parentName = parentName;
 		this.parentEmail = parentEmail;
 		this.parentContact = parentContact;
@@ -35,7 +36,7 @@ public class Parent {
 	}
 	
 	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String parentName, String parentEmail, int parentContact, int ccaID) {
-		this.parentObject = new Parent(studentID, studentName, grade, classID, teacherName, parentName, parentEmail, parentContact);
+		this.parentObject = new Parent(studentID, studentName, grade, classID, teacherName, studentCCA, parentName, parentEmail, parentContact);
 		this.ccaID = ccaID;
 	}
 

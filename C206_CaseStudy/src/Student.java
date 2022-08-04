@@ -6,13 +6,15 @@ public class Student {
 	private String grade;
 	private String classID;
 	private String teacherName;
+	private String studentCCA;
 	
-	public Student(String studentID, String studentName, String grade, String classID, String teacherName) {
+	public Student(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA) {
 		this.studentID = studentID;
 		this.studentName = studentName;
 		this.grade = grade;
 		this.classID = classID;
 		this.teacherName = teacherName;
+		this.studentCCA = studentCCA;
 	}
 	public String getStudentID() {
 		return studentID;
@@ -49,6 +51,13 @@ public class Student {
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
 	}
-
+	
+	public String getStudentCCA() {
+		return studentCCA;
+	}
+	
+	public void setStudentCCA(String studentCCA) {
+		this.studentCCA = studentCCA;
+	}
 
 }
