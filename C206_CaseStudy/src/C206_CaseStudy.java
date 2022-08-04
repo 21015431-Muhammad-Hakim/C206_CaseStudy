@@ -70,6 +70,7 @@ public class C206_CaseStudy {
 				if(option2 == 1) {
 					String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
 					String ccaDescription = Helper.readString("Enter CCA description > ");
+					String category = Helper.readString("Enter category > ");
 					int classSize = Helper.readInt("Enter class size > ");
 					String ccaDay = Helper.readString("Enter day of CCA > ");
 
@@ -77,7 +78,7 @@ public class C206_CaseStudy {
 
 					String ccaVenue = Helper.readString("Enter venue of CCA > ");
 					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
-					addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+					addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 
 				}
 				else if(option2 == 2) {
@@ -251,10 +252,10 @@ public class C206_CaseStudy {
 
 	//================================= CCA Part =================================\\
 
-	public static void addCca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
+	public static void addCca(String ccaTitle, String ccaDescription, String category, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
 
 		String output = "";
-		if(ccaList.add(new Cca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
+		if(ccaList.add(new Cca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
 			output = "CCA has been added!";
 		}
 		else {
@@ -264,9 +265,9 @@ public class C206_CaseStudy {
 	}
 
 	public static String viewAllCca(ArrayList<Cca> ccaList) {
-		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
+		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
 		for(Cca c : ccaList) {
-			output += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
+			output += String.format("\n%-10s %-15s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getCategory(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
 
 		}
 		System.out.println(output);
