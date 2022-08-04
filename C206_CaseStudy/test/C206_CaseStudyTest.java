@@ -11,6 +11,17 @@ public class C206_CaseStudyTest {
 	private Student student = new Student ("", "", "", "", "");
 	private Student student2  = new Student ("", "", "", "", "");
 	
+	private Cca cca1 = new Cca("", "", 0, "", "", "", "");
+	private Cca cca2 = new Cca("", "", 0, "", "", "", "");
+	
+	private String ccaTitle = "";
+	private String ccaDescription = "";
+	private int classSize = 0;
+	private String ccaDay = "";
+	private String ccaTime = "";
+	private String ccaVenue = "";
+	private String instructorInCharge = "";
+	
 	private String studentID = "";
 	private String studentName = "";
 	private String studentGrade = "";
@@ -37,6 +48,7 @@ public class C206_CaseStudyTest {
 	private ArrayList<Student> studentList = new ArrayList<Student>();
 	private ArrayList<Parent> parentList = new ArrayList<Parent>();
 	private ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
+	private static ArrayList<Cca> ccaList = new ArrayList<Cca>();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -92,6 +104,26 @@ public class C206_CaseStudyTest {
 	public void testDeleteStudent() {
 		
 	}
+	
+	@Test
+	public void testAddCcaDetail() {
+		
+		ccaList.clear();
+		
+		
+	}
+	
+	@Test
+	public void testViewAllCcaDetail() {
+		
+	}
+	
+	@Test
+	public void testDeleteCcaDetail() {
+		
+	}
+	
+	
 	@Test
 	public void testAddParent() {
 		//test if the parent is added into arraylist
