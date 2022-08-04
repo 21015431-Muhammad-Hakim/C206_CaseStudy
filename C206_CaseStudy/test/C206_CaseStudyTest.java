@@ -228,6 +228,39 @@ public class C206_CaseStudyTest {
 		//int testCCAID = C206_CaseStudy.generateCCAID();
 		//assertNotEquals(12345678, testCCAID);
 	}
+	
+	@Test
+	public void testloginSystem() {
+		//test whether the login was successful or not
+		boolean login = true;
+		if (studentID.equalsIgnoreCase(studentList.get(0).getStudentID())) {
+		} else {
+			login =false;
+		}
+		assertTrue("Test that the login was successful", login);
+	}
+	
+	@Test
+	public void testaddStudentforCCA() {
+		//test if the student is added into the cca
+		String output = C206_CaseStudy.viewStudent(studentList);
+		String cca = "basketball";
+		studentList.get(0).setStudentCCA(cca);
+		assertEquals("Test that the student is added into the cca", cca, studentList.get(0).getStudentCCA());
+		
+	}
+	
+	@Test 
+	public void testViewStudentRegCCA() {
+		//test the output and testoutput is the same
+		studentList.clear();
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		String output = C206_CaseStudy.viewStudent(studentList);
+		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA");
+		testOutput += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", studentList.get(0).getStudentID(), studentList.get(0).getStudentName(), studentList.get(0).getGrade(), studentList.get(0).getClassID(), studentList.get(0).getTeacherName(), studentList.get(0).getStudentCCA());
+		
+		assertEquals("Check that ViewStudentRegCCA", testOutput, output);
+	}
 
 	@After
 	public void tearDown() throws Exception {
