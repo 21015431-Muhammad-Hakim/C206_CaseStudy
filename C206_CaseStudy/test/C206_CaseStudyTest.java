@@ -52,13 +52,13 @@ public class C206_CaseStudyTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		studentID = "T0200537D";
+		studentID = "A0000";
 		studentName = "John";
 		studentGrade = "P6";
 		studentClass = "6A";
 		studentTeacher = "Mary";
 		
-		studentID1 = "T0200537F";
+		studentID1 = "A1000";
 		studentName1 = "Johns";
 		studentGrade1 = "P5";
 		studentClass1 = "5B";

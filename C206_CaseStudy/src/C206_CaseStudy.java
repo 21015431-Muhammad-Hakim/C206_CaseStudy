@@ -10,12 +10,14 @@ public class C206_CaseStudy {
 	private static ArrayList<Cca> ccaList = new ArrayList<Cca>();
 	private static int ccaID;
 
-	private static final String NRIC_CHECK = "[TGF][0-9]{7}[A-Z]";
+	private static final String NRIC_CHECK = "[A-Z][0-9]{4}";
 	private static final String GRADE_CHECK = "[P][1-6]";
 	private static final String CLASS_CHECK = "[1-6][A-Z]";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+		studentList.add(new Student("A0000","John","P6","6A","Mary"));
 
 		int option = 0;
 
@@ -24,32 +26,38 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter choice > ");
 
 			if (option == 1) {//student
-				int option1 = Helper.readInt("Enter choice (1.Add Student/2.View Student/Delete Student > ");
+				int option1 = Helper.readInt("Enter choice (1.Add Student/2.View Student)\n(3.Delete Student/4.Update Student Detail) > ");
 				if(option1 == 1) {
 					String studentID = Helper.readStringRegEx("Enter in student ID > ", NRIC_CHECK);
-					if(!studentList.contains(studentID)) {
-						String studentName = Helper.readString("Enter in student Name > ");
-						String grade = Helper.readStringRegEx("Enter in student Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
-						String classID = Helper.readStringRegEx("Enter in student Class > ",CLASS_CHECK);
-						String[] result1 = grade.split("");
-						String[] result2 = classID.split("");
-						if(result1[1].contains(result2[0])) {
-							String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
-							addStudent(studentID, studentName, grade, classID, teacherName);
+					for(Student S :studentList) {
+						if(!studentID.equalsIgnoreCase(S.getStudentID())) {
+							String studentName = Helper.readString("Enter in student Name > ");
+							String grade = Helper.readStringRegEx("Enter in student Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
+							String classID = Helper.readStringRegEx("Enter in student Class > ",CLASS_CHECK);
+							String[] result1 = grade.split("");
+							String[] result2 = classID.split("");
+							if(result1[1].contains(result2[0])) {
+								String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
+								addStudent(studentID, studentName, grade, classID, teacherName);
+								break;
+							}else {
+								System.out.println("Grade year and Class year do not match!");
+							}
 						}else {
-							System.out.println("Grade year and Class year do not match!");
+							System.out.println("Student already found!");
 						}
-					}else {
-						System.out.println("Student already found!");
-			
 					}
 				}
 				else if(option1 == 2) {
 					viewStudent();
 				}
 				else if(option1 == 3) {
-					String studentID = Helper.readString("Enter in studentID");
+					String studentID = Helper.readString("Enter in studentID > ");
 					deleteStudent(studentID);
+				}
+				else if(option1 == 4) {
+					String studentID = Helper.readString("Enter in studentID > ");
+					updateStudent(studentID);
 				}
 			} 
 			else if (option == 2) {//cca
@@ -168,13 +176,15 @@ public class C206_CaseStudy {
 		String output = "";
 		if(studentList.add(new Student(studentID, studentName, grade, classID, teacherName))) {
 			output = "Student has been added!";
+		}else {
+			output = "Failed to add Student!";
 		}
 		System.out.println(output);
 	}
 	public static void viewStudent() {
-		String output = String.format("%-15s %-15s %-5s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name");
+		String output = String.format("%-12s %-15s %-5s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name");
 		for (Student s: studentList) {
-			output += String.format("%-15s %-15s %-5s %-10s %-10s", s.getStudentID(), s.getStudentName(), s.getGrade(), s.getClassID(), s.getTeacherName());
+			output += String.format("\n%-12s %-15s %-5s %-10s %-10s", s.getStudentID(), s.getStudentName(), s.getGrade(), s.getClassID(), s.getTeacherName());
 		}
 		System.out.println(output);
 	}
@@ -187,7 +197,31 @@ public class C206_CaseStudy {
 			}
 			System.out.println(output);
 		}
-
+	}
+	public static void updateStudent(String studentID) {
+		String output = "";
+		for (int i=0;i<studentList.size();i++) {
+			if (studentList.get(i).getStudentID().equals(studentID)){
+				String newGrade = Helper.readStringRegEx("Enter in new student Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
+				String newClassID = Helper.readStringRegEx("Enter in new student Class > ",CLASS_CHECK);
+				
+				String[] result1 = newGrade.split("");
+				String[] result2 = newClassID.split("");
+				
+				if(result1[1].contains(result2[0])) {
+					studentList.get(i).setGrade(newGrade);
+					studentList.get(i).setClassID(newClassID);
+					String newTeacherName = Helper.readString("Enter in student's new Teacher's Name > ");
+					studentList.get(i).setTeacherName(newTeacherName);
+					output = "Student Updated!";
+				}else {
+					System.out.println("Grade year and Class year do not match!");
+				}
+			}else {
+				System.out.println("Student not found!");
+			}
+		}
+		System.out.println(output);
 	}
 
 	//================================= CCA Part =================================\\
