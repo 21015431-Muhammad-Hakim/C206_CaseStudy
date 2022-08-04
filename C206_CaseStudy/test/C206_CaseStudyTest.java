@@ -8,20 +8,22 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 
-	private Student student = new Student ("", "", "", "", "");
-	private Student student2  = new Student ("", "", "", "", "");
+	private Student student = new Student ("", "", "", "", "", "");
+	private Student student2  = new Student ("", "", "", "", "", "");
 	
 	private String studentID = "";
 	private String studentName = "";
 	private String studentGrade = "";
 	private String studentClass = "";
 	private String studentTeacher = "";
+	private String studentCCA = "";
 	
 	private String studentID1 = "";
 	private String studentName1 = "";
 	private String studentGrade1 = "";
 	private String studentClass1 = "";
 	private String studentTeacher1 = "";
+	private String studentCCA1 = "";
 	
 	private String parentName = "";
 	private String parentName2 = "";
@@ -40,20 +42,22 @@ public class C206_CaseStudyTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		studentID = "T0200537D";
+		studentID = "A0000";
 		studentName = "John";
 		studentGrade = "P6";
 		studentClass = "6A";
 		studentTeacher = "Mary";
+		studentCCA = "Basketball";
 		
-		studentID1 = "T0200537F";
+		studentID1 = "A1000";
 		studentName1 = "Johns";
 		studentGrade1 = "P5";
 		studentClass1 = "5B";
 		studentTeacher1 = "Marry";
+		studentCCA1 = "Baseball";
 		
-		student = new Student(studentID, studentName, studentGrade, studentClass, studentTeacher);
-		student2 = new Student(studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1);
+		student = new Student(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA);
+		student2 = new Student(studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1, studentCCA1);
 		
 		parentName = "Jackson";
 		parentName2 = "Jacksons";
@@ -81,7 +85,7 @@ public class C206_CaseStudyTest {
 		studentList.add(student);
 		studentList.add(student2);
 		//Check if new students can be detected
-		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher);
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA);
 		assertEquals("Check that student arraylist size is 2", 2, studentList.size());
 	}
 	@Test
