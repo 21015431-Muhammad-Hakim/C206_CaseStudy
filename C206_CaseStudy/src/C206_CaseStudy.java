@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-
+	
 public class C206_CaseStudy {
 
 	private ArrayList<Parent> parentList = new ArrayList<Parent>();
