@@ -17,7 +17,7 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		studentList.add(new Student("A0000","John","P6","6A","Mary"));
+		studentList.add(new Student("A0000","John","P6","6A","Mary","Basketball"));
 
 		int option = 0;
 
@@ -38,7 +38,8 @@ public class C206_CaseStudy {
 							String[] result2 = classID.split("");
 							if(result1[1].contains(result2[0])) {
 								String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
-								addStudent(studentID, studentName, grade, classID, teacherName);
+								String studentCCA = Helper.readString("Does the student have a CCA? \n(Enter in CCA name or NULL for no CCA) > ");
+								addStudent(studentID, studentName, grade, classID, teacherName, studentCCA);
 								break;
 							}else {
 								System.out.println("Grade year and Class year do not match!");
@@ -172,9 +173,9 @@ public class C206_CaseStudy {
 
 	//================================= Student Part =================================\\
 
-	public static void addStudent(String studentID, String studentName, String grade, String classID, String teacherName) {
+	public static void addStudent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA) {
 		String output = "";
-		if(studentList.add(new Student(studentID, studentName, grade, classID, teacherName))) {
+		if(studentList.add(new Student(studentID, studentName, grade, classID, teacherName, studentCCA))) {
 			output = "Student has been added!";
 		}else {
 			output = "Failed to add Student!";
@@ -182,9 +183,11 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	public static void viewStudent() {
-		String output = String.format("%-12s %-15s %-5s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name");
+		String output = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", 
+				"Teacher name", "Student CCA");
 		for (Student s: studentList) {
-			output += String.format("\n%-12s %-15s %-5s %-10s %-10s", s.getStudentID(), s.getStudentName(), s.getGrade(), s.getClassID(), s.getTeacherName());
+			output += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", s.getStudentID(), s.getStudentName(), 
+					s.getGrade(), s.getClassID(), s.getTeacherName(), s.getStudentCCA());
 		}
 		System.out.println(output);
 	}
@@ -213,6 +216,9 @@ public class C206_CaseStudy {
 					studentList.get(i).setClassID(newClassID);
 					String newTeacherName = Helper.readString("Enter in student's new Teacher's Name > ");
 					studentList.get(i).setTeacherName(newTeacherName);
+					String studentCCA = Helper.readString("Does the student have a  new CCA? "
+							+ "\n(Enter in  exisiting CCA name or New CCA) > ");
+					studentList.get(i).setStudentCCA(studentCCA);
 					output = "Student Updated!";
 				}else {
 					System.out.println("Grade year and Class year do not match!");
