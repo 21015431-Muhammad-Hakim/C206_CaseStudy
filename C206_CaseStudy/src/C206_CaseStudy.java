@@ -325,7 +325,7 @@ public class C206_CaseStudy {
 	public static void addCca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, String category, ArrayList<Cca> ccaList) {
 
 		String output = "";
-		if(ccaList.add(new Cca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category))) {
+		if(ccaList.add(new Cca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
 			output = "CCA has been added!";
 		}
 		else {

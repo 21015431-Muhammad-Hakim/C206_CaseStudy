@@ -22,13 +22,8 @@ public class Cca {
 	private String ccaTime;
 	private String ccaVenue;
 	private String instructorInCharge;
-	private String category;
 	
-<<<<<<< HEAD
-	public Cca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, String category) {
-=======
 	public Cca(String ccaTitle, String ccaDescription, String category, int classSize, String ccaDay, String ccaTime,String ccaVenue, String instructorInCharge) {
->>>>>>> branch 'master' of https://github.com/21015431-Muhammad-Hakim/C206_CaseStudy.git
 		
 		this.ccaTitle = ccaTitle;
 		this.ccaDescription = ccaDescription;
@@ -73,18 +68,4 @@ public class Cca {
 		return instructorInCharge;
 	}
 	
-<<<<<<< HEAD
-	public String getCategory() {
-		return category;
-	}
-=======
-	
-
-	
-	
-	
->>>>>>> branch 'master' of https://github.com/21015431-Muhammad-Hakim/C206_CaseStudy.git
-	
-	
- 
 }
