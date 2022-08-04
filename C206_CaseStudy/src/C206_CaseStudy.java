@@ -26,7 +26,7 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter choice > ");
 
 			if (option == 1) {//student
-				int option1 = Helper.readInt("Enter choice (1.Add Student/2.View Student/Delete Student) > ");
+				int option1 = Helper.readInt("Enter choice (1.Add Student/2.View Student/3.Delete Student) > ");
 				if(option1 == 1) {
 					String studentID = Helper.readStringRegEx("Enter in student ID > ", NRIC_CHECK);
 					for(Student S :studentList) {
@@ -52,7 +52,7 @@ public class C206_CaseStudy {
 					viewStudent();
 				}
 				else if(option1 == 3) {
-					String studentID = Helper.readString("Enter in studentID");
+					String studentID = Helper.readString("Enter in studentID > ");
 					deleteStudent(studentID);
 				}
 			} 
@@ -172,6 +172,8 @@ public class C206_CaseStudy {
 		String output = "";
 		if(studentList.add(new Student(studentID, studentName, grade, classID, teacherName))) {
 			output = "Student has been added!";
+		}else {
+			output = "Failed to add Student!";
 		}
 		System.out.println(output);
 	}
