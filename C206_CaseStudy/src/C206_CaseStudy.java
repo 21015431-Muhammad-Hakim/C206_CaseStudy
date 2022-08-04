@@ -424,7 +424,8 @@ public class C206_CaseStudy {
 	}
 
 	//================================= Login Part =================================\\
-	public static void loginsystem() {
+	public static boolean loginsystem() {
+		Boolean login = true;
 		String studentid = Helper.readString("Enter the student ID >");
 		int ccaid = Helper.readInt("Enter the CCA Registration ID > ");
 		for (int i=0; i<studentList.size(); i++) {
@@ -433,11 +434,14 @@ public class C206_CaseStudy {
 					System.out.println("Successfully Login!");
 				} else {
 					System.out.println("Invalid CCA Registration ID!");
+					login = false;
 				}
 			} else {
 				System.out.println("Invalid Student ID entered!");
+				login = false;
 			}
 		}
+		return login;
 	}
 	public static void addStudentforCCA() {
 		String studentid = Helper.readString("Enter the student ID >");

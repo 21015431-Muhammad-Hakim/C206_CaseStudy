@@ -257,21 +257,17 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void testloginSystem() {
-		//test whether the login was successful or not
-		boolean login = true;
-		if (studentID.equalsIgnoreCase(studentList.get(0).getStudentID())) {
-		} else {
-			login =false;
-		}
+		//test that the login was successful
+		boolean login = C206_CaseStudy.loginsystem();
 		assertTrue("Test that the login was successful", login);
 	}
 	
 	@Test
 	public void testaddStudentforCCA() {
 		//test if the student is added into the cca
-		String output = C206_CaseStudy.viewStudent(studentList);
-		String cca = "basketball";
-		studentList.get(0).setStudentCCA(cca);
+		studentList.clear();
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		String cca = "Basketball";
 		assertEquals("Test that the student is added into the cca", cca, studentList.get(0).getStudentCCA());
 		
 	}
