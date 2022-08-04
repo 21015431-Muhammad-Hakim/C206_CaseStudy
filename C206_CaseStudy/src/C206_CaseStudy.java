@@ -9,15 +9,15 @@ public class C206_CaseStudy {
 	private static ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
 	private static ArrayList<Cca> ccaList = new ArrayList<Cca>();
 	private static int ccaID;
-
+	
 	private static final String NRIC_CHECK = "[A-Z][0-9]{4}";
 	private static final String GRADE_CHECK = "[P][1-6]";
 	private static final String CLASS_CHECK = "[1-6][A-Z]";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		studentList.add(new Student("A0000","John","P6","6A","Mary","Basketball"));
+		
+		studentList.add(new Student("A0000","John","P6","6A","Mary"));
 
 		int option = 0;
 
@@ -26,7 +26,7 @@ public class C206_CaseStudy {
 			option = Helper.readInt("Enter choice > ");
 
 			if (option == 1) {//student
-				int option1 = Helper.readInt("Enter choice (1.Add Student/2.View Student)\n(3.Delete Student/4.Update Student Detail) > ");
+				int option1 = Helper.readInt("Enter choice (1.Add Student/2.View Student/3.Delete Student) > ");
 				if(option1 == 1) {
 					String studentID = Helper.readStringRegEx("Enter in student ID > ", NRIC_CHECK);
 					for(Student S :studentList) {
@@ -38,8 +38,7 @@ public class C206_CaseStudy {
 							String[] result2 = classID.split("");
 							if(result1[1].contains(result2[0])) {
 								String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
-								String studentCCA = Helper.readString("Does the student have a CCA? \n(Enter in CCA name or NULL for no CCA) > ");
-								addStudent(studentID, studentName, grade, classID, teacherName, studentCCA);
+								addStudent(studentID, studentName, grade, classID, teacherName);
 								break;
 							}else {
 								System.out.println("Grade year and Class year do not match!");
@@ -55,10 +54,6 @@ public class C206_CaseStudy {
 				else if(option1 == 3) {
 					String studentID = Helper.readString("Enter in studentID > ");
 					deleteStudent(studentID);
-				}
-				else if(option1 == 4) {
-					String studentID = Helper.readString("Enter in studentID > ");
-					updateStudent(studentID);
 				}
 			} 
 			else if (option == 2) {//cca
@@ -138,6 +133,18 @@ public class C206_CaseStudy {
 
 			else if (option == 5) {//registration system
 				int option5 = Helper.readInt("Enter choice > ");
+				loginsystem();
+				loginMenu();
+				int choice = Helper.readInt("Enter the choice >");
+				while (choice != 3) {
+					if (choice == 1) {
+						addStudentforCCA();
+					} else if (choice == 2) {
+						viewStudentRegCCA();
+					} else if (choice == 3) {
+						System.out.println("You will be log out of the system.");
+					}
+				}
 			} 
 
 			else if (option == 6) {//quit
@@ -164,6 +171,13 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete parent");
 		System.out.println("4. Quit");
 	}
+	
+	public static void loginMenu() {
+		C206_CaseStudy.setHeader("Registration System");
+		System.out.println("1. Add Student for CCA");
+		System.out.println("2. View Student Registered for a CCA");
+		System.out.println("3. Log out");
+	}
 
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
@@ -173,9 +187,9 @@ public class C206_CaseStudy {
 
 	//================================= Student Part =================================\\
 
-	public static void addStudent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA) {
+	public static void addStudent(String studentID, String studentName, String grade, String classID, String teacherName) {
 		String output = "";
-		if(studentList.add(new Student(studentID, studentName, grade, classID, teacherName, studentCCA))) {
+		if(studentList.add(new Student(studentID, studentName, grade, classID, teacherName))) {
 			output = "Student has been added!";
 		}else {
 			output = "Failed to add Student!";
@@ -183,11 +197,9 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	public static void viewStudent() {
-		String output = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", 
-				"Teacher name", "Student CCA");
+		String output = String.format("%-12s %-15s %-5s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name");
 		for (Student s: studentList) {
-			output += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", s.getStudentID(), s.getStudentName(), 
-					s.getGrade(), s.getClassID(), s.getTeacherName(), s.getStudentCCA());
+			output += String.format("\n%-12s %-15s %-5s %-10s %-10s", s.getStudentID(), s.getStudentName(), s.getGrade(), s.getClassID(), s.getTeacherName());
 		}
 		System.out.println(output);
 	}
@@ -200,34 +212,7 @@ public class C206_CaseStudy {
 			}
 			System.out.println(output);
 		}
-	}
-	public static void updateStudent(String studentID) {
-		String output = "";
-		for (int i=0;i<studentList.size();i++) {
-			if (studentList.get(i).getStudentID().equals(studentID)){
-				String newGrade = Helper.readStringRegEx("Enter in new student Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
-				String newClassID = Helper.readStringRegEx("Enter in new student Class > ",CLASS_CHECK);
-				
-				String[] result1 = newGrade.split("");
-				String[] result2 = newClassID.split("");
-				
-				if(result1[1].contains(result2[0])) {
-					studentList.get(i).setGrade(newGrade);
-					studentList.get(i).setClassID(newClassID);
-					String newTeacherName = Helper.readString("Enter in student's new Teacher's Name > ");
-					studentList.get(i).setTeacherName(newTeacherName);
-					String studentCCA = Helper.readString("Does the student have a  new CCA? "
-							+ "\n(Enter in  exisiting CCA name or New CCA) > ");
-					studentList.get(i).setStudentCCA(studentCCA);
-					output = "Student Updated!";
-				}else {
-					System.out.println("Grade year and Class year do not match!");
-				}
-			}else {
-				System.out.println("Student not found!");
-			}
-		}
-		System.out.println(output);
+
 	}
 
 	//================================= CCA Part =================================\\
@@ -328,5 +313,28 @@ public class C206_CaseStudy {
 		}
 
 		return Integer.parseInt(ccaID);
+	}
+	
+	//================================= Login Part =================================\\
+	public static void loginsystem() {
+		String studentid = Helper.readString("Enter the student ID >");
+		int ccaid = Helper.readInt("Enter the CCA Registration ID > ");
+		for (int i=0; i<studentList.size(); i++) {
+			if (studentid.equalsIgnoreCase(studentList.get(i).getStudentID())) {
+				if (ccaid == ccaID) {
+					System.out.println("Successfully Login!");
+				} else {
+					System.out.println("Invalid CCA Registration ID!");
+				}
+			} else {
+				System.out.println("Invalid Student ID entered!");
+			}
+		}
+	}
+	public static void addStudentforCCA() {
+		
+	}
+	public static void viewStudentRegCCA() {
+		
 	}
 }
