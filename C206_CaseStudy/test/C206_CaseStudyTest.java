@@ -331,6 +331,14 @@ public class C206_CaseStudyTest {
 		
 		assertEquals("Check that ViewStudentRegCCA", testOutput, output);
 	}
+	@Test
+	public void testDropStudentfromCCA() {
+		//test the student is drop out from CCA
+		studentList.clear();
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		studentList.get(0).setStudentCCA(null);
+		assertEquals("Test that the student is droped from the CCA", null, studentList.get(0).getStudentCCA());
+	}
 
 	@After
 	public void tearDown() throws Exception {
