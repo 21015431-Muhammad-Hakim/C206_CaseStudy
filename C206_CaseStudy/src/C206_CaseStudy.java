@@ -377,14 +377,8 @@ public class C206_CaseStudy {
 		if (isValidEmail(parentEmail)) {//check the parentEmail
 			parentList.add(new Parent(studentObject, parentName, parentEmail, parentContact));
 			if (parentList.size() == size+1) {
-				ccaID = generateCCAID();
+				ccaID = generateCCAID(updatedParentList);
 
-				for (int i=0;i<updatedParentList.size();i++) {
-					if(updatedParentList.get(i).getCCAID() == ccaID) {//ensure no duplicated cca id
-						ccaID = generateCCAID();
-						i = 0;//restart to test if newly generated cca id is a duplicate
-					}
-				}
 				updatedParentList.add(new Parent(parentList.get(parentList.size()-1), ccaID));
 
 				System.out.println("Successfully registered!");
@@ -441,9 +435,10 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static int generateCCAID() {
+	public static int generateCCAID(ArrayList<Parent> updatedParentList) {
 		String ccaID = "";
 		Random number = new Random();
+		boolean again = true;
 
 		ccaID += Integer.toString(number.nextInt(10));
 		while (ccaID.contains("0")) {//check if the cca id start with 0
@@ -453,6 +448,28 @@ public class C206_CaseStudy {
 
 		for (int i=0;i<8;i++) {//create rest of the cca id
 			ccaID += Integer.toString(number.nextInt(10));
+		}
+			
+		while (again != false) {
+			again = false;
+			for (Parent i:updatedParentList) {
+				if (i.getParentObject().getCCAID() != Integer.parseInt(ccaID)) {
+
+				}
+				else {
+					ccaID = "";
+					ccaID += Integer.toString(number.nextInt(10));
+					while (ccaID.contains("0")) {//check if the cca id start with 0
+						ccaID = "";
+						ccaID += Integer.toString(number.nextInt(10));
+					}
+
+					for (int j=0;j<8;j++) {//create rest of the cca id
+						ccaID += Integer.toString(number.nextInt(10));
+					}
+					again = true;
+				}
+			}
 		}
 
 		return Integer.parseInt(ccaID);
