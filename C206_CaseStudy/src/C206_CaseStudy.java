@@ -68,34 +68,7 @@ public class C206_CaseStudy {
 					updateStudent(studentID);
 				} 
 
-				else if (option == 2) {//cca
-
-					int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
-
-					if(option2 == 1) {
-						String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
-						String ccaDescription = Helper.readString("Enter CCA description > ");
-						int classSize = Helper.readInt("Enter class size > ");
-						String ccaDay = Helper.readString("Enter day of CCA > ");
-
-						String ccaTime = Helper.readString("Enter time of CCA > ");
-
-
-						String ccaVenue = Helper.readString("Enter venue of CCA > ");
-						String instructorInCharge = Helper.readString("Enter instructor in charge > ");
-						String category = Helper.readString("Enter category of CCA > ");
-						addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
-
-					}
-					else if(option2 == 2) {
-						viewAllCca(ccaList);
-					}
-					else if(option2 == 3) {
-						String ccaTitle = Helper.readString("Enter CCA title > ");
-						deleteCca(ccaTitle, ccaList);
-					}
-
-				}
+				
 			}
 
 			else if (option == 2) {//cca
@@ -105,6 +78,7 @@ public class C206_CaseStudy {
 				if(option2 == 1) {
 					String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
 					String ccaDescription = Helper.readString("Enter CCA description > ");
+					String category = Helper.readString("Enter category > ");
 					int classSize = Helper.readInt("Enter class size > ");
 					String ccaDay = Helper.readString("Enter day of CCA > ");
 
@@ -112,8 +86,8 @@ public class C206_CaseStudy {
 
 					String ccaVenue = Helper.readString("Enter venue of CCA > ");
 					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
-					String category = Helper.readString("Enter category of CCA > ");
-					addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
+					
+					addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 				} 
 			
 				else if(option2 == 2) {
@@ -322,7 +296,7 @@ public class C206_CaseStudy {
 
 	//================================= CCA Part =================================\\
 
-	public static void addCca(String ccaTitle, String ccaDescription, int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, String category, ArrayList<Cca> ccaList) {
+	public static void addCca(String ccaTitle, String ccaDescription, String category, int classSize,  String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
 
 		String output = "";
 		if(ccaList.add(new Cca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
@@ -335,9 +309,9 @@ public class C206_CaseStudy {
 	}
 
 	public static String viewAllCca(ArrayList<Cca> ccaList) {
-		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
+		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
 		for(Cca c : ccaList) {
-			output += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
+			output += String.format("\n%-10s %-15s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getCategory(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
 
 		}
 		System.out.println(output);
@@ -452,7 +426,8 @@ public class C206_CaseStudy {
 	}
 
 	//================================= Login Part =================================\\
-	public static void loginsystem() {
+	public static boolean loginsystem() {
+		Boolean login = true;
 		String studentid = Helper.readString("Enter the student ID >");
 		int ccaid = Helper.readInt("Enter the CCA Registration ID > ");
 		for (int i=0; i<studentList.size(); i++) {
@@ -461,11 +436,14 @@ public class C206_CaseStudy {
 					System.out.println("Successfully Login!");
 				} else {
 					System.out.println("Invalid CCA Registration ID!");
+					login = false;
 				}
 			} else {
 				System.out.println("Invalid Student ID entered!");
+				login = false;
 			}
 		}
+		return login;
 	}
 	public static void addStudentforCCA() {
 		String studentid = Helper.readString("Enter the student ID >");

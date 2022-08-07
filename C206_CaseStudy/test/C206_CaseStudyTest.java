@@ -56,6 +56,7 @@ public class C206_CaseStudyTest {
 	private ArrayList<Parent> parentList = new ArrayList<Parent>();
 	private ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
 	private static ArrayList<Cca> ccaList = new ArrayList<Cca>();
+	private ArrayList<String> categoryList = new ArrayList<String>();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -141,9 +142,7 @@ public class C206_CaseStudyTest {
 		
 		//Check if new cca can be detected
 
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
-
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 
 		assertEquals("Check that student arraylist size is 2", 2, ccaList.size()); //Check the size of the arrayList
 	
@@ -153,10 +152,7 @@ public class C206_CaseStudyTest {
 	public void testViewAllCca() {
 		ccaList.clear(); //start the test without external factor
 		
-
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList); //Add object into arrayList
-
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList); //Add object into arrayList
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);//Add object into arrayList
 
 		String output = C206_CaseStudy.viewAllCca(ccaList);
 		String testOutput = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
@@ -171,14 +167,44 @@ public class C206_CaseStudyTest {
 		
 		ccaList.clear();
 
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
-
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, category, ccaList);
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 
 		C206_CaseStudy.deleteCca(ccaTitle, ccaList);
 		assertEquals(ccaList.size(), 0); //Check the size of the arrayList
 	}
 	
+	@Test
+	public void testAddCategory() {
+		ccaList.clear();
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+		categoryList.add(category);
+		assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
+	}
+	
+	@Test
+	public void testViewCategory() {
+		ccaList.clear();
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+		
+		String category = Helper.readString("Enter category to view > ");
+		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge", "Category");
+		for (Cca i:ccaList) {
+			if (i.getCategory().equalsIgnoreCase(category)) {
+				output += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s %-10s", i.getCcaTitle(), i.getCcaDescription(), i.getClassSize(), i.getCcaDay(), i.getCcaTime(), i.getCcaVenue(), i.getInstructorInCharge(), i.getCategory());
+			}
+		}
+		System.out.println(output);
+		assertEquals("Check that ViewAllCcaList", output);
+	}
+	
+	@Test
+	public void testDeleteCategory() {
+		ccaList.clear();
+		
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+		C206_CaseStudy.deleteCategory(categoryList);
+		assertEquals(categoryList.size(), 0);
+	}
 	
 	@Test
 	public void testAddParent() {
@@ -275,6 +301,35 @@ public class C206_CaseStudyTest {
 	public void testGenerateCCAID() {
 		//int testCCAID = C206_CaseStudy.generateCCAID();
 		//assertNotEquals(12345678, testCCAID);
+	}
+	
+	@Test
+	public void testloginSystem() {
+		//test that the login was successful
+		boolean login = C206_CaseStudy.loginsystem();
+		assertTrue("Test that the login was successful", login);
+	}
+	
+	@Test
+	public void testaddStudentforCCA() {
+		//test if the student is added into the cca
+		studentList.clear();
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		String cca = "Basketball";
+		assertEquals("Test that the student is added into the cca", cca, studentList.get(0).getStudentCCA());
+		
+	}
+	
+	@Test 
+	public void testViewStudentRegCCA() {
+		//test the output and testoutput is the same
+		studentList.clear();
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		String output = C206_CaseStudy.viewStudent(studentList);
+		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA");
+		testOutput += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", studentList.get(0).getStudentID(), studentList.get(0).getStudentName(), studentList.get(0).getGrade(), studentList.get(0).getClassID(), studentList.get(0).getTeacherName(), studentList.get(0).getStudentCCA());
+		
+		assertEquals("Check that ViewStudentRegCCA", testOutput, output);
 	}
 
 	@After
