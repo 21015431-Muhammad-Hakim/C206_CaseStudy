@@ -499,7 +499,7 @@ public class C206_CaseStudy {
 	}
 	public static void dropStudentfromCCA() {
 		String studentId = Helper.readString("Enter the student ID >");
-		String studentCca = Helper.readString("Enter in CCA choice> ");
+		String studentCca = Helper.readString("Enter the CCA that want to drop > ");
 		for (int i=0; i<studentList.size(); i++) {
 			if (studentId.equalsIgnoreCase(studentList.get(i).getStudentID())) {
 				studentList.get(i).setStudentCCA(null);

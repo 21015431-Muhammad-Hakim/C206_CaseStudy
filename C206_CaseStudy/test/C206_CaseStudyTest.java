@@ -333,7 +333,7 @@ public class C206_CaseStudyTest {
 	}
 	@Test
 	public void testDropStudentfromCCA() {
-		//test the student is drop out from CCA
+		//test the student is drop out from the CCA
 		studentList.clear();
 		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
 		studentList.get(0).setStudentCCA(null);
