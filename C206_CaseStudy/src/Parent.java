@@ -82,5 +82,19 @@ public class Parent {
 	
 	public int getCCAID() {
 		return ccaID;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
+	public void setParentEmail(String parentEmail) {
+		this.parentEmail = parentEmail;
+	}
+
+	public void setParentContact(int parentContact) {
+		this.parentContact = parentContact;
 	}	
+	
+	
 }

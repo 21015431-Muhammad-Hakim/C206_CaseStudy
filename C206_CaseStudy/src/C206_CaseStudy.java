@@ -161,7 +161,15 @@ public class C206_CaseStudy {
 					}
 
 					else if (option3 == 4) {
-
+						ccaID = Helper.readInt("Enter in CCA ID");
+						String parentName = Helper.readString("Enter parent name to update(Enter same name if do not want to update) > ");
+						String parentEmail = Helper.readString("Enter parent email to update (Enter same email if do not want to update) > ");
+						int parentContact = Helper.readInt("Enter parent contact to update (Enter same contact if do not want to update) > ");
+						updateParent(ccaID, parentName, parentEmail, parentContact, updatedParentList, parentList);
+					}
+					
+					else if (option3 == 5) {
+						
 					}
 
 					else {
@@ -220,6 +228,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Add parent");
 		System.out.println("2. View parent");
 		System.out.println("3. Delete parent");
+		System.out.println("4. Update parent");
 		System.out.println("4. Quit");
 	}
 
@@ -365,7 +374,7 @@ public class C206_CaseStudy {
 
 	public static void addParent(Student studentObject, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList, int ccaID) {
 		int size = parentList.size();
-		if (parentEmail.contains("@") && (parentEmail.contains("."))) {//check the parentEmail
+		if (isValidEmail(parentEmail)) {//check the parentEmail
 			parentList.add(new Parent(studentObject, parentName, parentEmail, parentContact));
 			if (parentList.size() == size+1) {
 				ccaID = generateCCAID();
@@ -385,7 +394,11 @@ public class C206_CaseStudy {
 				System.out.println("Failed to register!");
 			}
 		}
+		else {
+			System.out.println("Failed to register!");
+		}
 	}
+		
 	public static String viewParent(ArrayList<Parent> parentList) {
 		String output = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
 		for (Parent p: parentList) {
@@ -405,6 +418,25 @@ public class C206_CaseStudy {
 			if (parentList.get(i).getStudentObject().getStudentID().equals(studentID)){
 				parentList.remove(i);
 			}
+		}
+	}
+	
+	public static void updateParent(int ccaID, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList) {
+		for (Parent i: parentList) {
+			if (i.getCCAID() == ccaID) {
+				i.setParentContact(parentContact);
+				i.setParentEmail(parentEmail);
+				i.setParentName(parentName);
+			}
+		}
+	}
+	
+	public static boolean isValidEmail(String parentEmail) {
+		if (parentEmail.contains("@")) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
