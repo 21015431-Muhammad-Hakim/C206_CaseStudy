@@ -427,6 +427,7 @@ public class C206_CaseStudy {
 				i.setParentContact(parentContact);
 				i.setParentEmail(parentEmail);
 				i.setParentName(parentName);
+				System.out.println("Successfully updated");
 			}
 		}
 	}
