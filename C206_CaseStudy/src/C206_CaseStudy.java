@@ -391,23 +391,25 @@ public class C206_CaseStudy {
 
 	public static void addParent(Student studentObject, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList, int ccaID) {
 		int size = parentList.size();
-		parentList.add(new Parent(studentObject, parentName, parentEmail, parentContact));
-		if (parentList.size() == size+1) {
-			ccaID = generateCCAID();
+		if (parentEmail.contains("@") && (parentEmail.contains("."))) {//check the parentEmail
+			parentList.add(new Parent(studentObject, parentName, parentEmail, parentContact));
+			if (parentList.size() == size+1) {
+				ccaID = generateCCAID();
 
-			for (int i=0;i<updatedParentList.size();i++) {
-				if(updatedParentList.get(i).getCCAID() == ccaID) {//ensure no duplicated cca id
-					ccaID = generateCCAID();
-					i = 0;//restart to test if newly generated cca id is a duplicate
+				for (int i=0;i<updatedParentList.size();i++) {
+					if(updatedParentList.get(i).getCCAID() == ccaID) {//ensure no duplicated cca id
+						ccaID = generateCCAID();
+						i = 0;//restart to test if newly generated cca id is a duplicate
+					}
 				}
-			}
-			updatedParentList.add(new Parent(parentList.get(parentList.size()-1), ccaID));
+				updatedParentList.add(new Parent(parentList.get(parentList.size()-1), ccaID));
 
-			System.out.println("Successfully registered!");
-			System.out.println("CCA ID: " + ccaID);
-		}
-		else {
-			System.out.println("Failed to register!");
+				System.out.println("Successfully registered!");
+				System.out.println("CCA ID: " + ccaID);
+			}
+			else {
+				System.out.println("Failed to register!");
+			}
 		}
 	}
 	public static String viewParent(ArrayList<Parent> parentList) {
