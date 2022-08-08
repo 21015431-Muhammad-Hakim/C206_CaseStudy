@@ -148,11 +148,15 @@ public class C206_CaseStudyTest {
 	public void testViewAllCca() {
 		ccaList.clear(); //start the test without external factor
 		
-		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);//Add object into arrayList
+		C206_CaseStudy.addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, 
+				instructorInCharge, ccaList);//Add object into arrayList
 
 		String output = C206_CaseStudy.viewAllCca(ccaList);
-		String testOutput = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
-		testOutput += String.format("\n%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", ccaList.get(0).getCcaTitle(), ccaList.get(0).getCcaDescription(), ccaList.get(0).getCategory(), ccaList.get(0).getClassSize(), ccaList.get(0).getCcaDay(), ccaList.get(0).getCcaTime(), ccaList.get(0).getCcaVenue(), ccaList.get(0).getInstructorInCharge());
+		String testOutput = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", 
+				"Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
+		testOutput += String.format("\n%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", ccaList.get(0).getCcaTitle(), 
+				ccaList.get(0).getCcaDescription(), ccaList.get(0).getCategory(), ccaList.get(0).getClassSize(), 
+				ccaList.get(0).getCcaDay(), ccaList.get(0).getCcaTime(), ccaList.get(0).getCcaVenue(), ccaList.get(0).getInstructorInCharge());
 
 		assertEquals("Check that ViewAllCcaList", testOutput, output); //Check if the output is the same as testOutput
 		 

@@ -9,15 +9,26 @@ public class C206_CaseStudy {
 	private static ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
 	private static ArrayList<Cca> ccaList = new ArrayList<Cca>();
 	private static ArrayList<String> categoryList = new ArrayList<String>();
+	private static ArrayList<String> dayList = new ArrayList<String>();
+	
 	private static int ccaID;
 
 	private static final String NRIC_CHECK = "[A-Z][0-9]{4}";
 	private static final String GRADE_CHECK = "[P][1-6]";
 	private static final String CLASS_CHECK = "[1-6][A-Z]";
+	
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		dayList.add("Monday");
+		dayList.add("Tuesday");
+		dayList.add("Wednesday");
+		dayList.add("Thursday");
+		dayList.add("Friday");
+		dayList.add("Saturday");
+		
 		studentList.add(new Student("A0000","John","P6","6A","Mary","Basketball"));
 		for (Cca i: ccaList) {
 			categoryList.add(i.getCategory());
@@ -73,21 +84,34 @@ public class C206_CaseStudy {
 
 			else if (option == 2) {//cca
 
-				int option2 = Helper.readInt("Enter choice (1.Add CCA details/2.View CCA/3.Delete a CCA) > ");
+				int option2 = Helper.readInt("Enter choice (1.Add CCA details / 2.View CCA / 3.Delete a CCA / 4.Update CCA) > ");
 
 				if(option2 == 1) {
 					String ccaTitle = Helper.readString("Enter CCA title > "); //Name of CCA
 					String ccaDescription = Helper.readString("Enter CCA description > ");
 					String category = Helper.readString("Enter category > ");
 					int classSize = Helper.readInt("Enter class size > ");
-					String ccaDay = Helper.readString("Enter day of CCA > ");
-
-					String ccaTime = Helper.readString("Enter time of CCA > ");
-
-					String ccaVenue = Helper.readString("Enter venue of CCA > ");
-					String instructorInCharge = Helper.readString("Enter instructor in charge > ");
 					
-					addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+					if(classSize < 50) {  //Checking class size to make sure it is not larger than 50
+						
+						String ccaDay = Helper.readString("Enter day of CCA > ");
+						if(dayList.contains(ccaDay)) {
+							String ccaTime = Helper.readString("Enter time of CCA > ");
+
+							String ccaVenue = Helper.readString("Enter venue of CCA > ");
+							String instructorInCharge = Helper.readString("Enter instructor in charge > ");
+							
+							addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
+						}
+						else {
+							System.out.println("Please enter a valid day.");
+						}
+						
+					}
+					else {
+						System.out.println("Class size is too big. PLease enter a smaller class size.");
+					}
+					
 				} 
 			
 				else if(option2 == 2) {
@@ -296,7 +320,8 @@ public class C206_CaseStudy {
 
 	//================================= CCA Part =================================\\
 
-	public static void addCca(String ccaTitle, String ccaDescription, String category, int classSize,  String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
+	public static void addCca(String ccaTitle, String ccaDescription, String category, 
+			int classSize,  String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
 
 		String output = "";
 		if(ccaList.add(new Cca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
@@ -309,9 +334,11 @@ public class C206_CaseStudy {
 	}
 
 	public static String viewAllCca(ArrayList<Cca> ccaList) {
-		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
+		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", 
+				"Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
 		for(Cca c : ccaList) {
-			output += String.format("\n%-10s %-15s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), c.getCategory(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
+			output += String.format("\n%-10s %-15s %-15s %-15d %-15s %-15s %-10s %-10s", c.getCcaTitle(), c.getCcaDescription(), 
+					c.getCategory(), c.getClassSize(), c.getCcaDay(), c.getCcaTime(), c.getCcaVenue(), c.getInstructorInCharge());
 
 		}
 		System.out.println(output);
