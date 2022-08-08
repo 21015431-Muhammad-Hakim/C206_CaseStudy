@@ -185,7 +185,15 @@ public class C206_CaseStudy {
 					}
 
 					else if (option3 == 4) {
-
+						ccaID = Helper.readInt("Enter in CCA ID");
+						String parentName = Helper.readString("Enter parent name to update(Enter same name if do not want to update) > ");
+						String parentEmail = Helper.readString("Enter parent email to update (Enter same email if do not want to update) > ");
+						int parentContact = Helper.readInt("Enter parent contact to update (Enter same contact if do not want to update) > ");
+						updateParent(ccaID, parentName, parentEmail, parentContact, updatedParentList, parentList);
+					}
+					
+					else if (option3 == 5) {
+						
 					}
 
 					else {
@@ -244,6 +252,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Add parent");
 		System.out.println("2. View parent");
 		System.out.println("3. Delete parent");
+		System.out.println("4. Update parent");
 		System.out.println("4. Quit");
 	}
 
@@ -392,25 +401,25 @@ public class C206_CaseStudy {
 
 	public static void addParent(Student studentObject, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList, int ccaID) {
 		int size = parentList.size();
-		parentList.add(new Parent(studentObject, parentName, parentEmail, parentContact));
-		if (parentList.size() == size+1) {
-			ccaID = generateCCAID();
+		if (isValidEmail(parentEmail)) {//check the parentEmail
+			parentList.add(new Parent(studentObject, parentName, parentEmail, parentContact));
+			if (parentList.size() == size+1) {
+				ccaID = generateCCAID(updatedParentList);
 
-			for (int i=0;i<updatedParentList.size();i++) {
-				if(updatedParentList.get(i).getCCAID() == ccaID) {//ensure no duplicated cca id
-					ccaID = generateCCAID();
-					i = 0;//restart to test if newly generated cca id is a duplicate
-				}
+				updatedParentList.add(new Parent(parentList.get(parentList.size()-1), ccaID));
+
+				System.out.println("Successfully registered!");
+				System.out.println("CCA ID: " + ccaID);
 			}
-			updatedParentList.add(new Parent(parentList.get(parentList.size()-1), ccaID));
-
-			System.out.println("Successfully registered!");
-			System.out.println("CCA ID: " + ccaID);
+			else {
+				System.out.println("Failed to register!");
+			}
 		}
 		else {
 			System.out.println("Failed to register!");
 		}
 	}
+		
 	public static String viewParent(ArrayList<Parent> parentList) {
 		String output = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
 		for (Parent p: parentList) {
@@ -432,10 +441,31 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	
+	public static void updateParent(int ccaID, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList) {
+		for (Parent i: parentList) {
+			if (i.getCCAID() == ccaID) {
+				i.setParentContact(parentContact);
+				i.setParentEmail(parentEmail);
+				i.setParentName(parentName);
+				System.out.println("Successfully updated");
+			}
+		}
+	}
+	
+	public static boolean isValidEmail(String parentEmail) {
+		if (parentEmail.contains("@")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
-	public static int generateCCAID() {
+	public static int generateCCAID(ArrayList<Parent> updatedParentList) {
 		String ccaID = "";
 		Random number = new Random();
+		boolean again = true;
 
 		ccaID += Integer.toString(number.nextInt(10));
 		while (ccaID.contains("0")) {//check if the cca id start with 0
@@ -445,6 +475,28 @@ public class C206_CaseStudy {
 
 		for (int i=0;i<8;i++) {//create rest of the cca id
 			ccaID += Integer.toString(number.nextInt(10));
+		}
+			
+		while (again != false) {
+			again = false;
+			for (Parent i:updatedParentList) {
+				if (i.getParentObject().getCCAID() != Integer.parseInt(ccaID)) {
+
+				}
+				else {
+					ccaID = "";
+					ccaID += Integer.toString(number.nextInt(10));
+					while (ccaID.contains("0")) {//check if the cca id start with 0
+						ccaID = "";
+						ccaID += Integer.toString(number.nextInt(10));
+					}
+
+					for (int j=0;j<8;j++) {//create rest of the cca id
+						ccaID += Integer.toString(number.nextInt(10));
+					}
+					again = true;
+				}
+			}
 		}
 
 		return Integer.parseInt(ccaID);
@@ -488,6 +540,17 @@ public class C206_CaseStudy {
 			}
 			System.out.println(output);
 		}
+	}
+	public static void dropStudentfromCCA() {
+		String studentId = Helper.readString("Enter the student ID >");
+		String studentCca = Helper.readString("Enter the CCA that want to drop > ");
+		for (int i=0; i<studentList.size(); i++) {
+			if (studentId.equalsIgnoreCase(studentList.get(i).getStudentID())) {
+				studentList.get(i).setStudentCCA(null);
+				System.out.println("Student " + studentId + "has been drop from " + studentCca);
+			}
+		}
+		
 	}
 
 }
