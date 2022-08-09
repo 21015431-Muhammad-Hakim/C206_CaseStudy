@@ -48,8 +48,8 @@ public class C206_CaseStudyTest {
 	
 	private int contact = 0;
 	private int contact2 = 0;
-	private Parent parent = new Parent(student, "", "", 0);
-	private Parent parent2 = new Parent(student, "", "", 0);
+	private Parent parent = new Parent("", "", "", "", "", "", "", "", 0);
+	private Parent parent2 = new Parent("", "", "", "", "", "", "", "", 0);
 	private int ccaID = 0;
 	private int ccaID2 = 0;
 	private ArrayList<Student> studentList = new ArrayList<Student>();
@@ -86,8 +86,8 @@ public class C206_CaseStudyTest {
 		contact = 12345678;
 		contact2 = 12345679;
 		
-		parent = new Parent(student, parentName, parentEmail, contact);
-		parent2 = new Parent(student2, parentName2, parentEmail2, contact2);
+		parent = new Parent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, parentName, parentEmail, contact);
+		parent2 = new Parent(studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1, studentCCA1, parentName2, parentEmail2, contact2);
 		ccaID = 12345678;		
 		ccaID2 = 87654321;
 		
@@ -241,8 +241,8 @@ public class C206_CaseStudyTest {
 		parentList.clear();
 		C206_CaseStudy.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);
 		String output = C206_CaseStudy.viewParent(parentList);
-		String testOutput = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
-		testOutput += String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10d\n", studentID, studentName, studentGrade, studentClass, studentTeacher, parentName, parentEmail, contact);
+		String testOutput = String.format("%-10s %-20s %-5s %-10s %-20s %-20s %-20s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
+		testOutput += String.format("%-10s %-20s %-5s %-10s %-20s %-20s %-20s %-10s\n", studentID, studentName, studentGrade, studentClass, studentTeacher, parentName, parentEmail, contact);
 		assertEquals(testOutput, output);
 		
 	}
@@ -254,9 +254,9 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);
 		C206_CaseStudy.addParent(student2, parentName2, parentEmail2, contact2, parentList, updatedParentList, ccaID2);
 		String output = C206_CaseStudy.viewParent(parentList);
-		String testOutput = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
-		testOutput += String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10d\n", studentID, studentName, studentGrade, studentClass, studentTeacher, parentName, parentEmail, contact);
-		testOutput += String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10d\n", studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1, parentName2, parentEmail2, contact2);
+		String testOutput = String.format("%-10s %-20s %-5s %-10s %-20s %-20s %-20s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
+		testOutput += String.format("%-10s %-20s %-5s %-10s %-20s %-20s %-20s %-10s\n", studentID, studentName, studentGrade, studentClass, studentTeacher, parentName, parentEmail, contact);
+		testOutput += String.format("%-10s %-20s %-5s %-10s %-20s %-20s %-20s %-10s\n", studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1, parentName2, parentEmail2, contact2);
 		assertEquals(testOutput, output);
 		
 	}

@@ -58,6 +58,8 @@ public class C206_CaseStudy {
 		dayList.add("Friday");
 
 		studentList.add(new Student("A0000","John","P6","6A","Mary","Basketball"));
+		parentList.add(new Parent("A0000","John","P6","6A","Mary","Basketball","1","@",1));
+		updatedParentList.add(new Parent("A0000","John","P6","6A","Mary","Basketball","1","@",1,1));
 		for (Cca i: ccaList) {
 			categoryList.add(i.getCategory());
 		}
@@ -222,9 +224,13 @@ public class C206_CaseStudy {
 						for (Student s: studentList) {
 							if (s.getStudentID().equals(studentID)) {
 								studentObject = s;
+								addParent(studentObject, parentName, parentEmail, parentContact, parentList, updatedParentList, ccaID);
+							}
+							else {
+								System.out.println("Register failed!");
 							}
 						}
-						addParent(studentObject, parentName, parentEmail, parentContact, parentList, updatedParentList, ccaID);
+						
 					}
 
 					else if (option3 == OPTION_VIEW_PARENT) {
@@ -243,7 +249,7 @@ public class C206_CaseStudy {
 						String parentName = Helper.readString("Enter parent name to update(Enter same name if do not want to update) > ");
 						String parentEmail = Helper.readString("Enter parent email to update (Enter same email if do not want to update) > ");
 						int parentContact = Helper.readInt("Enter parent contact to update (Enter same contact if do not want to update) > ");
-						updateParent(ccaID, parentName, parentEmail, parentContact, updatedParentList, parentList);
+						updateParent(ccaID, parentName, parentEmail, parentContact, parentList, updatedParentList);
 					}
 
 					else if (option3 == OPTION_QUIT_PARENT) {
@@ -555,13 +561,15 @@ public class C206_CaseStudy {
 
 	public static void addParent(Student studentObject, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList, int ccaID) {
 		int size = parentList.size();
+		
 		if (isValidEmail(parentEmail)) {//check the parentEmail
-			parentList.add(new Parent(studentObject, parentName, parentEmail, parentContact));
+			parentList.add(new Parent(studentObject.getStudentID(), studentObject.getStudentName(), studentObject.getGrade(), studentObject.getClassID(), studentObject.getTeacherName(), studentObject.getStudentCCA(), parentName, parentEmail, parentContact));
 			if (parentList.size() == size+1) {
 				ccaID = generateCCAID(updatedParentList);
 
-				updatedParentList.add(new Parent(parentList.get(parentList.size()-1), ccaID));
-
+				updatedParentList.add(new Parent(studentObject.getStudentID(), studentObject.getStudentName(), studentObject.getGrade(), studentObject.getClassID(), studentObject.getTeacherName(), studentObject.getStudentCCA(), parentName, parentEmail, parentContact, ccaID));
+				System.out.println(updatedParentList.get(0).getCCAID());
+				System.out.println(updatedParentList.get(0));
 				System.out.println("Successfully registered!");
 				System.out.println("CCA ID: " + ccaID);
 			}
@@ -575,36 +583,43 @@ public class C206_CaseStudy {
 	}
 
 	public static String viewParent(ArrayList<Parent> parentList) {
-		String output = String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
+		String output = String.format("%-10s %-20s %-5s %-10s %-20s %-20s %-20s %-10s\n", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Parent Name", "Parent Email", "Parent contact");
 		for (Parent p: parentList) {
-			output += String.format("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10d\n", p.getStudentObject().getStudentID(), p.getStudentObject().getStudentName(), p.getStudentObject().getGrade(), p.getStudentObject().getClassID(), p.getStudentObject().getTeacherName(), p.getParentName(), p.getParentEmail(), p.getParentContact());
+			output += String.format("%-10s %-20s %-5s %-10s %-20s %-20s %-20s %-10d\n", p.getStudentID(), p.getStudentName(), p.getGrade(), p.getClassID(), p.getTeacherName(), p.getParentName(), p.getParentEmail(), p.getParentContact());
 		}
 		return output;
 	}
 
 	public static void deleteParent(int ccaID, String studentID, ArrayList<Parent> updatedParentList, ArrayList<Parent> parentList) {
 		for (int i=0;i<updatedParentList.size();i++) {//updatedParentList has elements inside
-			if (updatedParentList.get(i).getParentObject().getStudentObject().getStudentID().equals(studentID) && updatedParentList.get(i).getParentObject().getCCAID() == ccaID){
+			if (updatedParentList.get(i).getStudentID().equals(studentID) && updatedParentList.get(i).getCCAID() == ccaID){
 				updatedParentList.remove(i);
 			}
 		}
 
 		for (int i=0;i<parentList.size();i++) {
-			if (parentList.get(i).getStudentObject().getStudentID().equals(studentID)){
+			if (parentList.get(i).getStudentID().equals(studentID)){
 				parentList.remove(i);
 			}
 		}
 	}
 
-	public static void updateParent(int ccaID, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList) {
-		for (Parent i: parentList) {
-			if (i.getCCAID() == ccaID) {
-				i.setParentContact(parentContact);
-				i.setParentEmail(parentEmail);
-				i.setParentName(parentName);
-				System.out.println("Successfully updated");
+	public static void updateParent(int ccaID, String parentName, String parentEmail, int parentContact, ArrayList<Parent> parentList, ArrayList<Parent> updatedParentList) {		
+		int counter = 0;
+		for (int i=0;i<updatedParentList.size();i++) {
+			if (updatedParentList.get(i).getCCAID() == ccaID) {
+				updatedParentList.get(i).setParentContact(parentContact);
+				updatedParentList.get(i).setParentEmail(parentEmail);
+				updatedParentList.get(i).setParentName(parentName);
+				counter = i;
 			}
 		}
+
+		parentList.get(counter).setParentContact(parentContact);
+		parentList.get(counter).setParentEmail(parentEmail);
+		parentList.get(counter).setParentName(parentName);
+		
+		System.out.println("Successfully updated");
 	}
 
 	public static boolean isValidEmail(String parentEmail) {
@@ -634,7 +649,7 @@ public class C206_CaseStudy {
 		while (again != false) {
 			again = false;
 			for (Parent i:updatedParentList) {
-				if (i.getParentObject().getCCAID() != Integer.parseInt(ccaID)) {
+				if (i.getCCAID() != Integer.parseInt(ccaID)) {
 
 				}
 				else {

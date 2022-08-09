@@ -13,30 +13,29 @@ public class Parent {
 	private int parentContact;
 	private int ccaID;
 	
-	private Student studentObject;
-	private Parent parentObject;
-	
-	public Parent(Student studentObject, String parentName, String parentEmail, int parentContact) {
-		this.studentObject = studentObject;
-		this.parentName = parentName;
-		this.parentEmail = parentEmail;
-		this.parentContact = parentContact;
-	}
-	
 	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, String parentName, String parentEmail, int parentContact) {
-		this.studentObject = new Student(studentID, studentName, grade, classID, teacherName, studentCCA);
+		this.studentID = studentID;
+		this.studentName = studentName;
+		this.grade = grade;
+		this.classID = classID;
+		this.teacherName = teacherName;
+		this.studentCCA = studentCCA;
 		this.parentName = parentName;
 		this.parentEmail = parentEmail;
 		this.parentContact = parentContact;
 	}
 	
-	public Parent(Parent parentObject, int ccaID) {//do not use the parent object created in the constructor below
-		this.parentObject = parentObject;
-		this.ccaID = ccaID;
-	}
 	
-	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String parentName, String parentEmail, int parentContact, int ccaID) {
-		this.parentObject = new Parent(studentID, studentName, grade, classID, teacherName, studentCCA, parentName, parentEmail, parentContact);
+	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, String parentName, String parentEmail, int parentContact, int ccaID) {
+		this.studentID = studentID;
+		this.studentName = studentName;
+		this.grade = grade;
+		this.classID = classID;
+		this.teacherName = teacherName;
+		this.studentCCA = studentCCA;
+		this.parentName = parentName;
+		this.parentEmail = parentEmail;
+		this.parentContact = parentContact;
 		this.ccaID = ccaID;
 	}
 
@@ -71,14 +70,6 @@ public class Parent {
 	public int getParentContact() {
 		return parentContact;
 	}
-
-	public Student getStudentObject() {
-		return studentObject;
-	}
-	
-	public Parent getParentObject() {
-		return parentObject;
-	}
 	
 	public int getCCAID() {
 		return ccaID;
@@ -94,6 +85,10 @@ public class Parent {
 
 	public void setParentContact(int parentContact) {
 		this.parentContact = parentContact;
+	}
+
+	public String getStudentCCA() {
+		return studentCCA;
 	}	
 	
 	
