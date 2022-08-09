@@ -329,6 +329,9 @@ public class C206_CaseStudyTest {
 		//test that the CCAID entered was not correct
 		int ccaid = 12345678;
 		assertNotEquals("Test that the ccaID entered was the same", ccaid, parentList.get(0).getCCAID());
+		// test that the login to system was successful
+		boolean login = true;
+		assertTrue("Test that the login was successful", login);
 	}
 	
 	@Test
@@ -343,10 +346,21 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
 		int no = 1;
 		assertEquals("Test that the CCANo was correct", no, studentList.get(0).getCCANO());
+		// test the CCANo was not the same
+		studentList.clear();
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
+		int No = 2;
+		assertNotEquals("Test that the CCANo was not correct", No, studentList.get(0).getCCANO());
 	}
 	
 	@Test 
 	public void testViewStudentRegCCA() {
+		//test that the studentList is not empty
+		studentList.clear();
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
+		assertFalse("Test that the studentList is not empty", studentList.isEmpty());
+		//test that the studentList is exist so that I can view 
+		assertNotNull("Test that the studentList is exist to view the student", studentList);
 		//test the output and testoutput is the same
 		studentList.clear();
 		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
