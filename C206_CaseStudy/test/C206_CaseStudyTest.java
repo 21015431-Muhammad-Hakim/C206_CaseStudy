@@ -105,8 +105,13 @@ public class C206_CaseStudyTest {
 	public void testAddStudent() {
 		//test if the student is added into arraylist
 		
+		//test if the student arraylist exists
+		assertNotNull(studentList);
+		
 		studentList.clear(); //start the test without external factor
 		studentList.add(student);
+		assertEquals("Check that student arraylist size is 1", 1, studentList.size());
+		
 		studentList.add(student2);
 		
 		//Check if new students can be detected
@@ -119,6 +124,7 @@ public class C206_CaseStudyTest {
 	public void testViewStudent() {
 		studentList.clear();
 		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		assertFalse(studentList.isEmpty());
 		String output = C206_CaseStudy.viewStudent(studentList);
 		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA");
 		testOutput += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", studentList.get(0).getStudentID(), studentList.get(0).getStudentName(), studentList.get(0).getGrade(), studentList.get(0).getClassID(), studentList.get(0).getTeacherName(), studentList.get(0).getStudentCCA());
@@ -129,6 +135,7 @@ public class C206_CaseStudyTest {
 	public void testDeleteStudent() {
 		studentList.clear();
 		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		assertFalse(studentList.isEmpty());
 		C206_CaseStudy.deleteStudent(studentID, studentList);
 		assertEquals(studentList.size(), 0); //Check the size of the arrayList
 		

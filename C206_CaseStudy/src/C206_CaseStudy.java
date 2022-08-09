@@ -374,9 +374,10 @@ public class C206_CaseStudy {
 				output = "Student has been removed!";
 			}else {
 				output = "Student not found!";
+				
 			}
 			System.out.println(output);
-
+			break;
 		}
 	}
 	public static void updateStudent(String studentID) {
