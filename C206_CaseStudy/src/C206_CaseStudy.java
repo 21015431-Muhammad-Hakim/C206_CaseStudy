@@ -145,6 +145,7 @@ public class C206_CaseStudy {
 								addCca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge, ccaList);
 								CCAMenu();
 								option2 = Helper.readInt("Enter choice > ");
+								
 							}
 							else {
 								System.out.println("Please enter a valid day.");
@@ -152,9 +153,11 @@ public class C206_CaseStudy {
 
 						}
 						else {
-							System.out.println("Class size is too big. PLease enter a smaller class size.");
+							System.out.println("Class size is too big. Please enter a smaller class size.");
 						}
-					} 
+		
+					}
+					
 
 					else if(option2 == OPTION_VIEW_CCA) {
 						viewAllCca(ccaList);
@@ -163,10 +166,12 @@ public class C206_CaseStudy {
 					else if(option2 == OPTION_DELETE_CCA) {
 						String ccaTitle = Helper.readString("Enter CCA title > ");
 						deleteCca(ccaTitle, ccaList);
+						break;
 					}
 					else if(option2 == OPTION_UPDATE_CCA) {
 						String ccaTitle = Helper.readString("Enter CCA title > ");
 						updateCca(ccaTitle);
+						break;
 					}
 					else if (option2 == OPTION_QUIT_CCA) {
 
@@ -306,6 +311,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Add CCA");
 		System.out.println("2. View CCA");
 		System.out.println("3. Delete CCA");
+		System.out.println("4. Update CCA");
 		System.out.println("4. Quit");
 
 	}
@@ -405,7 +411,7 @@ public class C206_CaseStudy {
 	//================================= CCA Part =================================\\
 
 	public static void addCca(String ccaTitle, String ccaDescription, String category, 
-			int classSize,  String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
+			int classSize, String ccaDay, String ccaTime, String ccaVenue, String instructorInCharge, ArrayList<Cca> ccaList) {
 
 		String output = "";
 		if(ccaList.add(new Cca(ccaTitle, ccaDescription, category, classSize, ccaDay, ccaTime, ccaVenue, instructorInCharge))) {
@@ -438,7 +444,7 @@ public class C206_CaseStudy {
 				output = "CCA has been removed!";
 			}
 			else {
-				output = "CCA remove failed.";
+				output = "CCA not found!";
 			}
 			System.out.println(output);
 		}
@@ -451,12 +457,14 @@ public class C206_CaseStudy {
 
 				String ccaDescription = Helper.readString("Enter CCA description > ");
 				String category = Helper.readString("Enter category > ");
+				
 				int classSize = Helper.readInt("Enter class size > ");
 
 				if(classSize <= 50) {  //Checking class size to make sure it is not larger than 50
 					ccaList.get(i).setClassSize(classSize);
 
 					String ccaDay = Helper.readString("Enter day of CCA > ");
+					
 					if(dayList.contains(ccaDay)) {
 						ccaList.get(i).setCcaDay(ccaDay);
 
@@ -478,7 +486,7 @@ public class C206_CaseStudy {
 
 				}
 				else {
-					System.out.println("Class size is too big. PLease enter a smaller class size.");
+					System.out.println("Class size is too big. Please enter a smaller class size.");
 				}
 
 			}else {
