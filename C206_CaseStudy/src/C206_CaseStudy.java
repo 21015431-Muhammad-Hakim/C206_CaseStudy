@@ -95,13 +95,13 @@ public class C206_CaseStudy {
 												System.out.println("Grade year and Class year do not match!");
 											}
 										}else {
-											System.out.println("Please enter student name!");
+											System.out.println("Please enter student class!");
 										}
 									}else {
 										System.out.println("Please enter student's grade!");
 									}
 								}else {
-									System.out.println("Please enter student's class!");
+									System.out.println("Please enter student's name!");
 								}
 							}
 							else {
