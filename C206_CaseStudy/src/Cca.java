@@ -67,5 +67,39 @@ public class Cca {
 	public String getInstructorInCharge() {
 		return instructorInCharge;
 	}
+
+	public void setCcaTitle(String ccaTitle) {
+		this.ccaTitle = ccaTitle;
+	}
+
+	public void setCcaDescription(String ccaDescription) {
+		this.ccaDescription = ccaDescription;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public void setClassSize(int classSize) {
+		this.classSize = classSize;
+	}
+
+	public void setCcaDay(String ccaDay) {
+		this.ccaDay = ccaDay;
+	}
+
+	public void setCcaTime(String ccaTime) {
+		this.ccaTime = ccaTime;
+	}
+
+	public void setCcaVenue(String ccaVenue) {
+		this.ccaVenue = ccaVenue;
+	}
+
+	public void setInstructorInCharge(String instructorInCharge) {
+		this.instructorInCharge = instructorInCharge;
+	}
+	
+	
 	
 }
