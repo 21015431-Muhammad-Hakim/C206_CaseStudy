@@ -77,20 +77,32 @@ public class C206_CaseStudy {
 						for(Student S :studentList) {
 							if(!studentID.equalsIgnoreCase(S.getStudentID())) {
 								String studentName = Helper.readString("Enter in student Name > ");
-								String grade = Helper.readStringRegEx("Enter in student Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
-								String classID = Helper.readStringRegEx("Enter in student Class > ",CLASS_CHECK);
-								String[] result1 = grade.split("");
-								String[] result2 = classID.split("");
-								if(result1[1].contains(result2[0])) {
-									String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
-									String studentCCA = Helper.readString("Enter in student's CCA(If no CCA enter N/A)> ");
-									addStudent(studentID, studentName, grade, classID, teacherName, studentCCA, studentList);
-									studentMenu();
-									option1 = Helper.readInt("Enter choice > ");
-									break;
-								}
-								else {
-									System.out.println("Grade year and Class year do not match!");
+								if(studentName.isBlank() == false) {
+									String grade = Helper.readStringRegEx("Enter in student Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
+									if(grade.isBlank() == false) {
+										String classID = Helper.readStringRegEx("Enter in student Class > ",CLASS_CHECK);
+										if(classID.isBlank() == false) {
+											String[] result1 = grade.split("");
+											String[] result2 = classID.split("");
+											if(result1[1].contains(result2[0])) {
+												String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
+												String studentCCA = Helper.readString("Enter in student's CCA(If no CCA enter N/A)> ");
+												addStudent(studentID, studentName, grade, classID, teacherName, studentCCA, studentList);
+												studentMenu();
+												option1 = Helper.readInt("Enter choice > ");
+												break;
+											}
+											else {
+												System.out.println("Grade year and Class year do not match!");
+											}
+										}else {
+											System.out.println("Please enter a student name!");
+										}
+									}else {
+										System.out.println("Please enter student's grade!");
+									}
+								}else {
+									System.out.println("Please enter student's class!");
 								}
 							}
 							else {
@@ -374,7 +386,7 @@ public class C206_CaseStudy {
 				output = "Student has been removed!";
 			}else {
 				output = "Student not found!";
-				
+
 			}
 			System.out.println(output);
 			break;
