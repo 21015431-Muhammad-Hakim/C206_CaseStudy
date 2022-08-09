@@ -240,6 +240,7 @@ public class C206_CaseStudyTest {
 		
 		assertEquals("Check that ViewAllCcaList", testOutput, output);
 	}
+
 	
 	@Test
 	public void testDeleteCategory() {

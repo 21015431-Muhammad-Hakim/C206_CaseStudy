@@ -539,7 +539,7 @@ public class C206_CaseStudy {
 						i.getCcaDescription(), i.getCategory(), i.getClassSize(), i.getCcaDay(), i.getCcaTime(), i.getCcaVenue(), i.getInstructorInCharge());
 			}
 		}
-		System.out.println(output);
+		System.out.println(output); 
 		return output;
 		
 	}
