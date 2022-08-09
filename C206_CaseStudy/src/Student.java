@@ -7,14 +7,16 @@ public class Student {
 	private String classID;
 	private String teacherName;
 	private String studentCCA;
+	private int CCANo;
 	
-	public Student(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA) {
+	public Student(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, int CCANo) {
 		this.studentID = studentID;
 		this.studentName = studentName;
 		this.grade = grade;
 		this.classID = classID;
 		this.teacherName = teacherName;
 		this.studentCCA = studentCCA;
+		this.CCANo = CCANo;
 	}
 	public String getStudentID() {
 		return studentID;
@@ -58,6 +60,12 @@ public class Student {
 	
 	public void setStudentCCA(String studentCCA) {
 		this.studentCCA = studentCCA;
+	}
+	public int getCCANO() {
+		return CCANo;
+	}
+	public void setCCANO(int CCANo) {
+		this.CCANo = CCANo;
 	}
 
 }

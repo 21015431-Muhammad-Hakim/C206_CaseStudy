@@ -25,7 +25,6 @@ public class Parent {
 		this.parentContact = parentContact;
 	}
 	
-	
 	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, String parentName, String parentEmail, int parentContact, int ccaID) {
 		this.studentID = studentID;
 		this.studentName = studentName;
