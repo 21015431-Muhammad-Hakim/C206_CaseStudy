@@ -68,7 +68,7 @@ public class C206_CaseStudyTest {
 		studentClass = "6A";
 		studentTeacher = "Mary";
 		studentCCA = "Basketball";
-		CCANo = CCANo +1;
+		CCANo = 1;
 		
 		studentID1 = "A1000";
 		studentName1 = "Johns";
@@ -76,7 +76,7 @@ public class C206_CaseStudyTest {
 		studentClass1 = "5B";
 		studentTeacher1 = "Marry";
 		studentCCA1 = "Baseball";
-		CCANo1 = CCANo1 +1;
+		CCANo1 = 1;
 		
 		student = new Student(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo);
 		student2 = new Student(studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1, studentCCA1, CCANo1);
@@ -130,8 +130,8 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
 		assertFalse(studentList.isEmpty());
 		String output = C206_CaseStudy.viewStudent(studentList);
-		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA");
-		testOutput += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", studentList.get(0).getStudentID(), studentList.get(0).getStudentName(), studentList.get(0).getGrade(), studentList.get(0).getClassID(), studentList.get(0).getTeacherName(), studentList.get(0).getStudentCCA());
+		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA", "No of CCA");
+		testOutput += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s %-10d", studentList.get(0).getStudentID(), studentList.get(0).getStudentName(), studentList.get(0).getGrade(), studentList.get(0).getClassID(), studentList.get(0).getTeacherName(), studentList.get(0).getStudentCCA(), studentList.get(0).getCCANO());
 		
 		assertEquals("Check that ViewAllStudentList", testOutput, output); //Check if the output is the same as testOutput
 	}
@@ -328,7 +328,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the studentID entered was correct", parentList.get(0).getStudentID(), studentList.get(0).getStudentID());
 		//test that the CCAID entered was not correct
 		int ccaid = 12345678;
-		assertEquals("Test that the ccaID entered was the same", ccaid, parentList.get(0).getCCAID());
+		assertNotEquals("Test that the ccaID entered was the same", ccaid, parentList.get(0).getCCAID());
 	}
 	
 	@Test
@@ -351,9 +351,8 @@ public class C206_CaseStudyTest {
 		studentList.clear();
 		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
 		String output = C206_CaseStudy.viewStudent(studentList);
-		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA");
-		testOutput += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", studentList.get(0).getStudentID(), studentList.get(0).getStudentName(), studentList.get(0).getGrade(), studentList.get(0).getClassID(), studentList.get(0).getTeacherName(), studentList.get(0).getStudentCCA());
-		
+		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA", "No of CCA");
+		testOutput += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s %-10d", studentList.get(0).getStudentID(),studentList.get(0).getStudentName(), studentList.get(0).getGrade(), studentList.get(0).getClassID(),studentList.get(0).getTeacherName(), studentList.get(0).getStudentCCA(), studentList.get(0).getCCANO());
 		assertEquals("Check that ViewStudentRegCCA", testOutput, output);
 	}
 
