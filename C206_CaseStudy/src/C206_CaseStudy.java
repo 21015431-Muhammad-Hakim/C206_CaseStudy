@@ -11,6 +11,7 @@ public class C206_CaseStudy {
 	private static ArrayList<String> categoryList = new ArrayList<String>();
 	private static ArrayList<String> dayList = new ArrayList<String>();
 	
+	
 	private static int ccaID;
 
 	private static final String NRIC_CHECK = "[A-Z][0-9]{4}";
@@ -27,7 +28,6 @@ public class C206_CaseStudy {
 		dayList.add("Wednesday");
 		dayList.add("Thursday");
 		dayList.add("Friday");
-		dayList.add("Saturday");
 		
 		studentList.add(new Student("A0000","John","P6","6A","Mary","Basketball"));
 		for (Cca i: ccaList) {
@@ -120,6 +120,10 @@ public class C206_CaseStudy {
 				else if(option2 == 3) {
 					String ccaTitle = Helper.readString("Enter CCA title > ");
 					deleteCca(ccaTitle, ccaList);
+				}
+				else if(option2 == 4) {
+					String ccaTitle = Helper.readString("Enter CCA title > ");
+					updateCca(ccaTitle);
 				}
 
 			}
@@ -366,6 +370,84 @@ public class C206_CaseStudy {
 				output = "CCA remove failed.";
 			}
 			System.out.println(output);
+		}
+	}
+	
+	public static void updateCca(String ccaTitle) {
+		
+		for (int i=0;i<ccaList.size();i++) {
+			if (ccaList.get(i).getCcaTitle().equals(ccaTitle)){
+				
+				String ccaDescription = Helper.readString("Enter CCA description > ");
+				String category = Helper.readString("Enter category > ");
+				int classSize = Helper.readInt("Enter class size > ");
+				
+				if(classSize < 50) {  //Checking class size to make sure it is not larger than 50
+					ccaList.get(i).setClassSize(classSize);
+					
+					String ccaDay = Helper.readString("Enter day of CCA > ");
+					if(dayList.contains(ccaDay)) {
+						ccaList.get(i).setCcaDay(ccaDay);
+						
+						String ccaTime = Helper.readString("Enter time of CCA > ");
+						ccaList.get(i).setCcaTime(ccaTime);
+						
+						String ccaVenue = Helper.readString("Enter venue of CCA > ");
+						ccaList.get(i).setCcaVenue(ccaVenue);
+						
+						String instructorInCharge = Helper.readString("Enter instructor in charge > ");
+						ccaList.get(i).setInstructorInCharge(instructorInCharge);
+						
+						System.out.println("CCA details updated!");
+						
+					}
+					else {
+						System.out.println("Please enter a valid day.");
+					}
+					
+				}
+				else {
+					System.out.println("Class size is too big. PLease enter a smaller class size.");
+				}
+
+			}else {
+				System.out.println("CCA not found!");
+			}
+		}
+	}
+	
+	public static void checkCcaPolicies() {
+		int numOfCcaPerWk = Helper.readInt("Enter total number of CCA(s) per week > ");
+		
+		if(numOfCcaPerWk > 0 && numOfCcaPerWk <= 3) {  //Max number of CCA should be 3
+			
+			int numOfCcaPerDay = Helper.readInt("Enter number of CCA(s) per day > ");
+			
+			if(numOfCcaPerDay == 2) {  //If CCA per day is 2
+				
+				char ccaLunchBreak = Helper.readChar("One CCA during lunch break? (Y/N) > "); 
+				char ccaAfterSchool = Helper.readChar("One CCA after class? (Y/N) > ");
+				
+				if(ccaLunchBreak == 'Y' && ccaAfterSchool == 'Y') {
+					System.out.println("Number of CCA per day is acceptable.");
+				}
+				else if(ccaLunchBreak == 'Y' && ccaAfterSchool == 'N') {
+					System.out.println("Please make sure one CCA is after school.");
+				}
+				else if(ccaLunchBreak == 'N' && ccaAfterSchool == 'Y') {
+					System.out.println("Please make sure one CCA is during lunch break.");
+				}
+				else {
+					System.out.println("Please make sure that one CCA is during lunch break and one is after class.");
+				}
+			}
+			else {      //CCA per day is 1
+				System.out.println("Number of CCA per day is acceptable.");
+			}
+			
+		}
+		else {
+			System.out.println("Only 3 CCAs is allowed per student.");
 		}
 	}
 	
