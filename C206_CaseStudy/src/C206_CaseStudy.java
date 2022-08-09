@@ -713,21 +713,27 @@ public class C206_CaseStudy {
 		String studentCCA = Helper.readString("Enter in CCA choice> ");
 		for (int i=0; i<studentList.size(); i++) {
 			for (int x =0; x<parentList.size(); x++) {
-				if (studentid.equalsIgnoreCase(parentList.get(x).getStudentID())) {
-					if (parentList.get(x).getStudentID().equalsIgnoreCase(studentList.get(i).getStudentID())) {
-						studentList.get(i).setStudentCCA(studentCCA);
-						int output = studentList.get(i).getCCANO();
-						String[] ccano  = studentCCA.split(",");
-						output = output + ccano.length;
-						studentList.get(i).setCCANO(output);
+				for (int o =0; o<ccaList.size(); o++) {
+					if (studentid.equalsIgnoreCase(parentList.get(x).getStudentID())) {
+						if (parentList.get(x).getStudentID().equalsIgnoreCase(studentList.get(i).getStudentID())) {
+							if (studentCCA.equalsIgnoreCase(ccaList.get(o).getCcaTitle())) {
+								studentList.get(i).setStudentCCA(studentCCA);
+								int output = studentList.get(i).getCCANO();
+								String[] ccano  = studentCCA.split(",");
+								output = output + ccano.length;
+								studentList.get(i).setCCANO(output);
+							} else {
+								System.out.println("Invalid CCA has been entered");
+						}
 					} else {
-						System.out.println("Invalid studentID has been entered");
+						System.out.println("Invalid studentID entered");
 					}
 				} else {
-					System.out.println("Invalid studentID has been entered");
+					System.out.println("Invalid studentID entered");
 				}
-			}	
-		} System.out.println("Successfully added!");
+				}
+				}
+		}System.out.println("Successfully added!");
 	}
 	public static void viewStudentRegCCA() {
 		String output = String.format("%-12s %-15s %-5s %-10s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA", "No of CCA");
