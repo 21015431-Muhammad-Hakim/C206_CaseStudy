@@ -23,8 +23,8 @@ public class Parent {
 		this.parentContact = parentContact;
 	}
 	
-	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, String parentName, String parentEmail, int parentContact) {
-		this.studentObject = new Student(studentID, studentName, grade, classID, teacherName, studentCCA);
+	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String studentCCA, int CCANo, String parentName, String parentEmail, int parentContact) {
+		this.studentObject = new Student(studentID, studentName, grade, classID, teacherName, studentCCA, CCANo );
 		this.parentName = parentName;
 		this.parentEmail = parentEmail;
 		this.parentContact = parentContact;
@@ -35,8 +35,8 @@ public class Parent {
 		this.ccaID = ccaID;
 	}
 	
-	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, String parentName, String parentEmail, int parentContact, int ccaID) {
-		this.parentObject = new Parent(studentID, studentName, grade, classID, teacherName, studentCCA, parentName, parentEmail, parentContact);
+	public Parent(String studentID, String studentName, String grade, String classID, String teacherName, int CCANo, String parentName, String parentEmail, int parentContact, int ccaID) {
+		this.parentObject = new Parent(studentID, studentName, grade, classID, teacherName, studentCCA, CCANo, parentName, parentEmail, parentContact);
 		this.ccaID = ccaID;
 	}
 

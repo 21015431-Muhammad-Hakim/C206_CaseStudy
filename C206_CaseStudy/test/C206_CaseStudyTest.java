@@ -8,8 +8,8 @@ import org.junit.Test;
 
 public class C206_CaseStudyTest {
 
-	private Student student = new Student ("", "", "", "", "", "");
-	private Student student2  = new Student ("", "", "", "", "", "");
+	private Student student = new Student ("", "", "", "", "", "",0);
+	private Student student2  = new Student ("", "", "", "", "", "",0);
 	
 	private Cca cca1 = new Cca("", "", "", 0, "", "", "", "");
 	private Cca cca2 = new Cca("", "", "", 0, "", "", "", "");
@@ -29,6 +29,7 @@ public class C206_CaseStudyTest {
 	private String studentClass = "";
 	private String studentTeacher = "";
 	private String studentCCA = "";
+	private int CCANo = 0;
 	
 	private String studentID1 = "";
 	private String studentName1 = "";
@@ -36,6 +37,7 @@ public class C206_CaseStudyTest {
 	private String studentClass1 = "";
 	private String studentTeacher1 = "";
 	private String studentCCA1 = "";
+	private int CCANo1 = 0;
 	
 	private String parentName = "";
 	private String parentName2 = "";
@@ -66,6 +68,7 @@ public class C206_CaseStudyTest {
 		studentClass = "6A";
 		studentTeacher = "Mary";
 		studentCCA = "Basketball";
+		CCANo = CCANo +1;
 		
 		studentID1 = "A1000";
 		studentName1 = "Johns";
@@ -73,9 +76,10 @@ public class C206_CaseStudyTest {
 		studentClass1 = "5B";
 		studentTeacher1 = "Marry";
 		studentCCA1 = "Baseball";
+		CCANo1 = CCANo1 +1;
 		
-		student = new Student(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA);
-		student2 = new Student(studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1, studentCCA1);
+		student = new Student(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo);
+		student2 = new Student(studentID1, studentName1, studentGrade1, studentClass1, studentTeacher1, studentCCA1, CCANo1);
 		
 		parentName = "Jackson";
 		parentName2 = "Jacksons";
@@ -115,7 +119,7 @@ public class C206_CaseStudyTest {
 		studentList.add(student2);
 		
 		//Check if new students can be detected
-		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
 		
 		//Check the size of the arrayList
 		assertEquals("Check that student arraylist size is 3", 3, studentList.size());
@@ -123,7 +127,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testViewStudent() {
 		studentList.clear();
-		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
 		assertFalse(studentList.isEmpty());
 		String output = C206_CaseStudy.viewStudent(studentList);
 		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA");
@@ -134,7 +138,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testDeleteStudent() {
 		studentList.clear();
-		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
 		assertFalse(studentList.isEmpty());
 		C206_CaseStudy.deleteStudent(studentID, studentList);
 		assertEquals(studentList.size(), 0); //Check the size of the arrayList
@@ -314,41 +318,43 @@ public class C206_CaseStudyTest {
 		//assertNotEquals(12345678, testCCAID);
 	}
 	
-	//@Test
-	//public void testloginSystem() {
-		//test that the login was successful
-		//boolean login = C206_CaseStudy.loginsystem();
-		//assertTrue("Test that the login was successful", login);
-	//}
+	@Test
+	public void testloginSystem() {
+		//test that the studentID entered was correct
+		studentList.clear();
+		parentList.clear();
+		C206_CaseStudy.addParent(student, parentName, parentEmail, contact, parentList, updatedParentList, ccaID);
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
+		assertEquals("Test that the studentID entered was correct", parentList.get(0).getStudentID(), studentList.get(0).getStudentID());
+		//test that the CCAID entered was not correct
+		int ccaid = 12345678;
+		assertEquals("Test that the ccaID entered was the same", ccaid, parentList.get(0).getCCAID());
+	}
 	
 	@Test
 	public void testaddStudentforCCA() {
 		//test if the student is added into the cca
 		studentList.clear();
-		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
 		String cca = "Basketball";
 		assertEquals("Test that the student is added into the cca", cca, studentList.get(0).getStudentCCA());
-		
+		// test that the CCANo was updated for the student
+		studentList.clear();
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
+		int no = 1;
+		assertEquals("Test that the CCANo was correct", no, studentList.get(0).getCCANO());
 	}
 	
 	@Test 
 	public void testViewStudentRegCCA() {
 		//test the output and testoutput is the same
 		studentList.clear();
-		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
+		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, CCANo, studentList);
 		String output = C206_CaseStudy.viewStudent(studentList);
 		String testOutput = String.format("%-12s %-15s %-5s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA");
 		testOutput += String.format("\n%-12s %-15s %-5s %-10s %-10s %-10s", studentList.get(0).getStudentID(), studentList.get(0).getStudentName(), studentList.get(0).getGrade(), studentList.get(0).getClassID(), studentList.get(0).getTeacherName(), studentList.get(0).getStudentCCA());
 		
 		assertEquals("Check that ViewStudentRegCCA", testOutput, output);
-	}
-	@Test
-	public void testDropStudentfromCCA() {
-		//test the student is drop out from the CCA
-		studentList.clear();
-		C206_CaseStudy.addStudent(studentID, studentName, studentGrade, studentClass, studentTeacher, studentCCA, studentList);
-		studentList.get(0).setStudentCCA(null);
-		assertEquals("Test that the student is droped from the CCA", null, studentList.get(0).getStudentCCA());
 	}
 
 	@After
