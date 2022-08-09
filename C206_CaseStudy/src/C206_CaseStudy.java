@@ -204,11 +204,13 @@ public class C206_CaseStudy {
 					}
 
 					else if (option4 == OPTION_VIEW_CATEGORY) {
-						viewCategory(ccaList);
+						String category = Helper.readString("Enter category to view > ");
+						viewCategory(category, ccaList);
 					}
 
 					else if (option4 == OPTION_DELETE_CATEGORY) {
-						deleteCategory(categoryList);
+						String category = Helper.readString("Enter category to delete > ");
+						deleteCategory(category, categoryList);
 					}
 					else if (option4 == OPTION_QUIT_CCA_CATEGORY) {
 
@@ -324,7 +326,7 @@ public class C206_CaseStudy {
 		System.out.println("2. View CCA");
 		System.out.println("3. Delete CCA");
 		System.out.println("4. Update CCA");
-		System.out.println("4. Quit");
+		System.out.println("5. Quit");
 
 	}
 
@@ -439,9 +441,12 @@ public class C206_CaseStudy {
 
 		for (int i=0;i<ccaList.size();i++) {
 			if (ccaList.get(i).getCcaTitle().equals(ccaTitle)){
-
+				
 				String ccaDescription = Helper.readString("Enter CCA description > ");
+				ccaList.get(i).setCcaDescription(ccaDescription);
+				
 				String category = Helper.readString("Enter category > ");
+				ccaList.get(i).setCategory(category);
 				
 				int classSize = Helper.readInt("Enter class size > ");
 
@@ -523,24 +528,34 @@ public class C206_CaseStudy {
 		categoryList.add(category);
 	}
 
-	public static String viewCategory(ArrayList<Cca> ccaList) {
-		String category = Helper.readString("Enter category to view > ");
-		String output = String.format("%-10s %-15s %-15s %-15s %-15s %-10s %-10s %-10s", "Title", "Description", "Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge", "Category");
+	public static String viewCategory(String category, ArrayList<Cca> ccaList) {
+		
+		String output = "";
+		output = String.format("%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", "Title", "Description", "Category", 
+				"Class Size", "Day of CCA", "Time of CCA", "Venue", "Instructor In Charge");
 		for (Cca i:ccaList) {
 			if (i.getCategory().equalsIgnoreCase(category)) {
-				output += String.format("\n%-10s %-15s %-15d %-15s %-15s %-10s %-10s %-10s", i.getCcaTitle(), i.getCcaDescription(), i.getClassSize(), i.getCcaDay(), i.getCcaTime(), i.getCcaVenue(), i.getInstructorInCharge(), i.getCategory());
+				output += String.format("\n%-10s %-15s %-15s %-15s %-15s %-15s %-10s %-10s", i.getCcaTitle(), 
+						i.getCcaDescription(), i.getCategory(), i.getClassSize(), i.getCcaDay(), i.getCcaTime(), i.getCcaVenue(), i.getInstructorInCharge());
 			}
 		}
 		System.out.println(output);
 		return output;
+		
 	}
 
-	public static void deleteCategory(ArrayList<String> categoryList) {
-		String category = Helper.readString("Enter category to delete");
+	public static void deleteCategory(String category, ArrayList<String> categoryList) {
+		
+		String output = "";
 		for (String i:categoryList) {
 			if (i.equalsIgnoreCase(category)) {
 				categoryList.remove(i);
+				output = "Category has been removed!";
 			}
+			else {
+				output = "Category not found!";
+			}
+			System.out.println(output);
 		}
 	}
 
