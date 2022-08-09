@@ -13,7 +13,7 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADD_PARENT = 1;
 	private static final int OPTION_QUIT_PARENT = 5;
 	private static final int OPTION_QUIT_CCA_CATEGORY = 4;
-	private static final int OPTION_QUIT_STUDENT = 5;
+	private static final int OPTION_QUIT_STUDENT = 4;
 	private static final int OPTION_QUIT_CCA = 5;
 	private static final int OPTION_PARENT = 4;
 	private static final int OPTION_DELETE_CATEGORY = 3;
@@ -25,7 +25,6 @@ public class C206_CaseStudy {
 	private static final int OPTION_VIEW_CCA = 2;
 	private static final int OPTION_ADD_CCA = 1;
 	private static final int OPTION_CCA = 2;
-	private static final int OPTION_UPDATE_STUDENT = 4;
 	private static final int OPTION_DELETE_STUDENT = 3;
 	private static final int OPTION_VIEW_STUDENT = 2;
 	private static final int OPTION_ADD_STUDENT = 1;
@@ -74,7 +73,7 @@ public class C206_CaseStudy {
 			if (option == OPTION_STUDENT) {//student
 				studentMenu();
 				int option1 = Helper.readInt("Enter choice > ");
-				while(option1 != 5) {
+				while(option1 != 4) {
 					if(option1 == OPTION_ADD_STUDENT) {
 						String studentID = Helper.readStringRegEx("Enter in student ID > ", NRIC_CHECK);
 						for(Student S :studentList) {
@@ -119,10 +118,6 @@ public class C206_CaseStudy {
 					else if(option1 == OPTION_DELETE_STUDENT) {
 						String studentID = Helper.readString("Enter in studentID > ");
 						deleteStudent(studentID, studentList);
-					}
-					else if(option1 == OPTION_UPDATE_STUDENT) {
-						String studentID = Helper.readString("Enter in studentID > ");
-						updateStudent(studentID);
 					}
 					else if (option1 == OPTION_QUIT_STUDENT) {
 
@@ -319,8 +314,7 @@ public class C206_CaseStudy {
 		System.out.println("1. Add Student");
 		System.out.println("2. View Student");
 		System.out.println("3. Delete Student");
-		System.out.println("4. Update Student");
-		System.out.println("5. Quit");
+		System.out.println("4. Quit");
 
 	}
 	public static void CCAMenu() {
@@ -398,30 +392,6 @@ public class C206_CaseStudy {
 
 		}
 	}
-	public static void updateStudent(String studentID) {
-		for (int i=0;i<studentList.size();i++) {
-			if (studentList.get(i).getStudentID().equals(studentID)){
-				String grade = Helper.readStringRegEx("Enter in student's new Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
-				String classID = Helper.readStringRegEx("Enter in student's new Class > ",CLASS_CHECK);
-				String[] result1 = grade.split("");
-				String[] result2 = classID.split("");
-				if(result1[1].contains(result2[0])) {
-					studentList.get(i).setGrade(grade);
-					studentList.get(i).setClassID(classID);
-					String teacherName = Helper.readString("Enter in student's new Teacher's Name > ");
-					studentList.get(i).setTeacherName(teacherName);
-					String studentCCA = Helper.readString("Enter in student's new CCA> ");
-					studentList.get(i).setStudentCCA(studentCCA);
-				}else {
-					System.out.println("Grade year and Class year do not match!");
-				}
-
-			}else {
-				System.out.println("Student not found!");
-			}
-		}
-	}
-
 	//================================= CCA Part =================================\\
 
 	public static void addCca(String ccaTitle, String ccaDescription, String category, 
