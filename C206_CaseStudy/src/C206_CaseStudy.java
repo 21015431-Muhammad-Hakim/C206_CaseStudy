@@ -720,12 +720,14 @@ public class C206_CaseStudy {
 						String[] ccano  = studentCCA.split(",");
 						output = output + ccano.length;
 						studentList.get(i).setCCANO(output);
-						System.out.println(output);
+					} else {
+						System.out.println("Invalid studentID has been entered");
 					}
+				} else {
+					System.out.println("Invalid studentID has been entered");
 				}
-			}
-			
-		}
+			}	
+		} System.out.println("Successfully added!");
 	}
 	public static void viewStudentRegCCA() {
 		String output = String.format("%-12s %-15s %-5s %-10s %-10s %-10s %-10s", "Student ID", "Student Name", "Grade", "Class ID", "Teacher name", "Student CCA", "No of CCA");
