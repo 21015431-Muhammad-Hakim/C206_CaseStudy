@@ -31,22 +31,22 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADD_STUDENT = 1;
 	private static final int OPTION_STUDENT = 1;
 	private static final int OPTION_QUIT = 6;
-	
+
 	private static ArrayList<Parent> parentList = new ArrayList<Parent>();
 	private static ArrayList<Student> studentList = new ArrayList<Student>();
 	private static ArrayList<Parent> updatedParentList = new ArrayList<Parent>();
 	private static ArrayList<Cca> ccaList = new ArrayList<Cca>();
 	private static ArrayList<String> categoryList = new ArrayList<String>();
 	private static ArrayList<String> dayList = new ArrayList<String>();
-	
-	
+
+
 	private static int ccaID;
 
 	private static final String NRIC_CHECK = "[A-Z][0-9]{4}";
 	private static final String GRADE_CHECK = "[P][1-6]";
 	private static final String CLASS_CHECK = "[1-6][A-Z]";
-	
-	
+
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -56,7 +56,7 @@ public class C206_CaseStudy {
 		dayList.add("Wednesday");
 		dayList.add("Thursday");
 		dayList.add("Friday");
-		
+
 		studentList.add(new Student("A0000","John","P6","6A","Mary","Basketball", 1));
 		for (Cca i: ccaList) {
 			categoryList.add(i.getCategory());
@@ -77,19 +77,31 @@ public class C206_CaseStudy {
 						for(Student S :studentList) {
 							if(!studentID.equalsIgnoreCase(S.getStudentID())) {
 								String studentName = Helper.readString("Enter in student Name > ");
-								String grade = Helper.readStringRegEx("Enter in student Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
-								String classID = Helper.readStringRegEx("Enter in student Class > ",CLASS_CHECK);
-								String[] result1 = grade.split("");
-								String[] result2 = classID.split("");
-								if(result1[1].contains(result2[0])) {
-									String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
-									String studentCCA = Helper.readString("Enter in student's CCA(If no CCA enter N/A)> ");
-									int CCANo = Helper.readInt("Enter the No of CCA that student have (0-3) >");
-									addStudent(studentID, studentName, grade, classID, teacherName, studentCCA, CCANo, studentList);
-									break;
-								}
-								else {
-									System.out.println("Grade year and Class year do not match!");
+								if(studentName.isBlank() == false) {
+									String grade = Helper.readStringRegEx("Enter in student Grade (P1/P2/P3/P4/P5/P6) > ",GRADE_CHECK);
+									if(grade.isBlank() == false) {
+										String classID = Helper.readStringRegEx("Enter in student Class > ",CLASS_CHECK);
+										if(classID.isBlank() == false) {
+											String[] result1 = grade.split("");
+											String[] result2 = classID.split("");
+											if(result1[1].contains(result2[0])) {
+												String teacherName = Helper.readString("Enter in student's Teacher's Name > ");
+												String studentCCA = Helper.readString("Enter in student's CCA(If no CCA enter N/A)> ");
+												int CCANo = Helper.readInt("Enter the No of CCA that student have (0-3) >");
+												addStudent(studentID, studentName, grade, classID, teacherName, studentCCA, CCANo, studentList);
+												break;
+											}
+											else {
+												System.out.println("Grade year and Class year do not match!");
+											}
+										}else {
+											System.out.println("Please enter student name!");
+										}
+									}else {
+										System.out.println("Please enter student's grade!");
+									}
+								}else {
+									System.out.println("Please enter student's class!");
 								}
 							}
 							else {
@@ -120,7 +132,7 @@ public class C206_CaseStudy {
 			}
 
 			else if (option == OPTION_CCA) {//cca
-				
+
 				CCAMenu();
 				int option2 = Helper.readInt("Enter choice > ");
 				while(option2 != 5) {
@@ -129,10 +141,10 @@ public class C206_CaseStudy {
 						String ccaDescription = Helper.readString("Enter CCA description > ");
 						String category = Helper.readString("Enter category > ");
 						int classSize = Helper.readInt("Enter class size > ");
-						 
+
 						if(classSize <= 50) {   //To make sure class size enter is not more then 50
 							String ccaDay = Helper.readString("Enter day of CCA > ");
-							
+
 							if(dayList.contains(ccaDay)) {  //To check if day enter is a valid day
 								String ccaTime = Helper.readString("Enter time of CCA > ");
 
@@ -434,39 +446,39 @@ public class C206_CaseStudy {
 			System.out.println(output);
 		}
 	}
-	
+
 	public static void updateCca(String ccaTitle) {
-		
+
 		for (int i=0;i<ccaList.size();i++) {
 			if (ccaList.get(i).getCcaTitle().equals(ccaTitle)){
-				
+
 				String ccaDescription = Helper.readString("Enter CCA description > ");
 				String category = Helper.readString("Enter category > ");
 				int classSize = Helper.readInt("Enter class size > ");
-				
+
 				if(classSize <= 50) {  //Checking class size to make sure it is not larger than 50
 					ccaList.get(i).setClassSize(classSize);
-					
+
 					String ccaDay = Helper.readString("Enter day of CCA > ");
 					if(dayList.contains(ccaDay)) {
 						ccaList.get(i).setCcaDay(ccaDay);
-						
+
 						String ccaTime = Helper.readString("Enter time of CCA > ");
 						ccaList.get(i).setCcaTime(ccaTime);
-						
+
 						String ccaVenue = Helper.readString("Enter venue of CCA > ");
 						ccaList.get(i).setCcaVenue(ccaVenue);
-						
+
 						String instructorInCharge = Helper.readString("Enter instructor in charge > ");
 						ccaList.get(i).setInstructorInCharge(instructorInCharge);
-						
+
 						System.out.println("CCA details updated!");
-						
+
 					}
 					else {
 						System.out.println("Please enter a valid day.");
 					}
-					
+
 				}
 				else {
 					System.out.println("Class size is too big. PLease enter a smaller class size.");
@@ -477,19 +489,19 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-	
+
 	public static void checkCcaPolicies() {
 		int numOfCcaPerWk = Helper.readInt("Enter total number of CCA(s) per week > ");
-		
+
 		if(numOfCcaPerWk > 0 && numOfCcaPerWk <= 3) {  //Max number of CCA should be 3
-			
+
 			int numOfCcaPerDay = Helper.readInt("Enter number of CCA(s) per day > ");
-			
+
 			if(numOfCcaPerDay == 2) {  //If CCA per day is 2
-				
+
 				char ccaLunchBreak = Helper.readChar("One CCA during lunch break? (Y/N) > "); 
 				char ccaAfterSchool = Helper.readChar("One CCA after class? (Y/N) > ");
-				
+
 				if(ccaLunchBreak == 'Y' && ccaAfterSchool == 'Y') {
 					System.out.println("Number of CCA per day is acceptable.");
 				}
@@ -506,13 +518,13 @@ public class C206_CaseStudy {
 			else {      //CCA per day is 1
 				System.out.println("Number of CCA per day is acceptable.");
 			}
-			
+
 		}
 		else {
 			System.out.println("Only 3 CCAs is allowed per student.");
 		}
 	}
-	
+
 
 	//================================= Category Part ====================================\\
 
