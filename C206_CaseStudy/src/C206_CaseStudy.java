@@ -170,6 +170,7 @@ public class C206_CaseStudy {
 
 					else if(option2 == OPTION_VIEW_CCA) {
 						viewAllCca(ccaList);
+						break;
 					}
 					else if(option2 == OPTION_DELETE_CCA) {
 						String ccaTitle = Helper.readString("Enter CCA title > ");
